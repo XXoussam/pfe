@@ -1,0 +1,44 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="discount" id="discount">
+  <div class="image">
+    <div class="content">
+
+      <img src="/assets/imgs/chojra.png" alt="" />
+    </div>
+  </div>
+  <div class="form">
+    <div class="content" style="width: 450px">
+      <h2>Se connecter</h2>
+      <form action="" name="myform" (ngSubmit)="login(myForm)" [formGroup]="myForm">
+        <input class="input"
+               type="email"
+               placeholder="Votre E-mail"
+               name="userName"
+               formControlName="userName"
+               />
+        <div  *ngIf="userName && userName.invalid && userName.touched" style="margin-top: -18px">
+          <span style="color: red;display: flex">Email invalide</span>
+          <br>
+
+        </div>
+
+        <input [ngStyle]="{'border-color': userPassword && userPassword.invalid && userPassword.touched ? 'red' : ''}"
+               class="input" type="password"
+               placeholder="mot de passe"
+               name="password" formControlName="userPassword"  required
+        />
+
+        <div>
+
+          <input id="btnlogin" type="submit" value="Connection" [disabled]="!myForm.valid"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

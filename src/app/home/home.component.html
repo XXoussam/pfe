@@ -1,0 +1,356 @@
+
+<!-- Start Landing -->
+<div class="landing">
+  <div class="container">
+    <div class="text">
+      <h1>Bienvenue à UpcyclingArt</h1>
+      <p>Ici, on donne aux choses une autre vie à vivre. Rejoignez-nous dans notre mission de promouvoir la durabilité et la créativité grâce à l'art de l'upcycling.
+      </p>
+    </div>
+    <div class="image">
+      <img src="/assets/imgs/2502606-removebg-preview.png" alt="" />
+    </div>
+  </div>
+  <a (click)="topFunction()" style="cursor: pointer" class="go-down" id="myBtn">
+    <i class="fas fa-angle-double-up fa-2x"></i>
+  </a>
+</div>
+<!-- End Landing -->
+<!-- Start Articles -->
+<div class="articles" id="articles">
+  <h2 class="main-title">À propos</h2>
+  <div style="display: flex">
+    <div class="container">
+      <div class="box">
+        <div class="content">
+          <h3>Qui sommes-nous ?</h3>
+          <p>
+            Nous offre une plate-forme aux artistes et aux utilisateurs pour créer et découvrir des œuvres d'art uniques fabriquées à partir de matériaux recyclés. Notre mission est de réduire les déchets et d'inspirer les gens à voir la beauté et la valeur de la réutilisation des objets du quotidien. Rejoignez-nous dans notre voyage vers un avenir plus durable.
+          </p>
+        </div>
+        <div class="info">
+          <a routerLink="/signup">Adhérer maintenant</a>
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </div>
+      </div>
+    </div>
+    <img style="width: 250px;margin-right: 180px" src="/assets/imgs/chair.png">
+  </div>
+</div>
+<div class="spikes"></div>
+<!-- End Articles -->
+<!-- Start Gallery -->
+<div class="gallery" id="gallery">
+  <h2 class="main-title">Galerie</h2>
+  <div class="container">
+    <div class="box">
+      <div class="image">
+        <img src="/assets/imgs/AdobeStock_164285965_Preview.jpeg" alt="" />
+      </div>
+    </div>
+    <div class="box">
+      <div class="image">
+        <img src="/assets/imgs/AdobeStock_500433436_Preview.jpeg" alt="" />
+      </div>
+    </div>
+    <div class="box">
+      <div class="image">
+        <img src="/assets/imgs/gallery-06.jpg" alt="" />
+      </div>
+    </div>
+    <div class="box">
+      <div class="image">
+        <img src="/assets/imgs/AdobeStock_289907278_Preview.jpeg" alt="" />
+      </div>
+    </div>
+    <div class="box">
+      <div class="image">
+        <img src="/assets/imgs/AdobeStock_344942361_Preview.jpeg" alt="" />
+      </div>
+    </div>
+    <div class="box">
+      <div class="image">
+        <img src="/assets/imgs/gallery-04.jpeg" alt="" />
+      </div>
+    </div>
+  </div>
+  <!--Start before after images-->
+  <br>
+    <app-before-after slide_script="src/assets/js/slide.js"></app-before-after>
+  <!--End before after images-->
+</div>
+<!-- End Gallery -->
+
+<!-- Start Testimonials -->
+<div class="testimonials" id="testimonials">
+  <h2 class="main-title">Nos Artistes</h2>
+  <div class="container">
+    <div class="box">
+      <img src="/assets/imgs/avatar-01.png" alt="" />
+      <h3>Mohamed Farag</h3>
+      <span class="title">Artiste</span>
+      <div class="rate">
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="far fa-star"></i>
+      </div>
+      <p>
+        Je suis un peintre contemporain qui crée des compositions vibrantes et abstraites en utilisant des couleurs vives et des coups de pinceau gestuels.
+      </p>
+    </div>
+    <div class="box">
+      <img src="/assets/imgs/avatar-02.png" alt="" />
+      <h3>Mohamed Ibrahim</h3>
+      <span class="title">Artiste</span>
+      <div class="rate">
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="far fa-star"></i>
+      </div>
+      <p>
+        je suis un sculpteur qui travaille principalement le bronze. Ses pièces sont souvent inspirées par la nature et présentent des détails et des textures complexes.
+      </p>
+    </div>
+    <div class="box">
+      <img src="/assets/imgs/avatar-03.png" alt="" />
+      <h3>Shady Nabil</h3>
+      <span class="title">Artiste</span>
+      <div class="rate">
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="filled fas fa-star"></i>
+        <i class="far fa-star"></i>
+      </div>
+      <p>
+        est un artiste en techniques mixtes qui combine peinture et dessin dans son travail. Ses pièces sont ludiques et fantaisistes, mettant en vedette des éléments de la nature et de la vie quotidienne      </p>
+    </div>
+
+  </div>
+</div>
+<!-- End Testimonials -->
+<!--Start winning artist-->
+<app-carousel></app-carousel>
+<!--End winning artist-->
+<!-- Start Services -->
+<div class="services" id="services">
+  <h2 class="main-title">Services</h2>
+  <div class="container">
+    <div class="box">
+      <i class="fas fa-user-shield fa-4x"></i>
+      <h3>sécurité</h3>
+      <div class="info">
+        <a href="#">Détails</a>
+      </div>
+    </div>
+    <div class="box">
+      <i class="fas fa-tools fa-4x"></i>
+      <h3>Résolution des problèmes</h3>
+      <div class="info">
+        <a href="#">Détails</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <i class="fas fa-bullhorn fa-4x"></i>
+      <h3>Commercialisation</h3>
+      <div class="info">
+        <a href="#">Détails</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Services -->
+
+<!-- Start Work Steps -->
+<div class="work-steps" id="work-steps">
+  <h2 class="main-title">Comment ça fonctionne ?</h2>
+  <div class="container">
+    <img src="/assets/imgs/man-workshop-upcycling-working-fire-surround_625516-1346.avif" alt="" class="image" />
+    <br>
+    <br>
+    <div class="info" style="display: flex;">
+      <div class="box">
+        <img src="/assets/imgs/work-steps-1.png" alt="" />
+        <div class="text">
+          <h3>Si vous êtes un artiste</h3>
+          <p>
+            vous pouvez parcourir les listes et sélectionner les matériaux qui vous intéressent, et les utiliser pour créer des œuvres d'art recyclées. Présentez votre travail dans notre galerie en ligne et communiquez avec des clients potentiels. partagez vos projets en cours, et recevez les notes des utilisateurs.
+          </p>
+        </div>
+      </div>
+      <div class="box">
+        <img src="/assets/imgs/work-steps-2.png" alt="" />
+        <div class="text">
+          <h3>Si vous êtes un simple utilisateur</h3>
+          <p>
+            vous pouvez vous inscrire gratuitement. Si vous avez des objets à donner, vous pouvez les ajouter à la plateforme. Les artistes sur le site peuvent sélectionner ces matériaux pour créer des œuvres d'art recyclées. Utilisez notre système de filtrage pour rechercher des matériaux en fonction de la catégorie, de l'emplacement et de la disponibilité.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- End Work Steps -->
+
+<!-- Start Pricing -->
+<div class="pricing" id="pricing">
+  <div class="dots dots-up"></div>
+  <div class="dots dots-down"></div>
+  <h2 class="main-title">Forfaits tarifaires</h2>
+  <div class="container">
+    <div class="box">
+      <div class="title">Basic pour les utilisateurs simples</div>
+      <img src="/assets/imgs/hosting-basic.png" alt="" />
+      <div class="price">
+        <span class="amount">Free</span>
+
+      </div>
+      <ul>
+        <li>avoir votre propre profil</li>
+        <li>postez vos objets</li>
+        <li>voir le travail d'autres artistes</li>
+        <li>contacter l'artiste en privé</li>
+      </ul>
+      <a style="margin: 111px auto 40px;" href="#">Choisissez un forfait</a>
+    </div>
+    <div class="box">
+      <div class="title">professionnel</div>
+      <img src="/assets/imgs/hosting-professional.png" alt="" />
+      <div class="price">
+        <span class="amount">20 DT</span>
+        <span class="time">Par mois / 3 semaines d'essai gratuit</span>
+      </div>
+      <ul>
+        <li>avoir votre propre profil</li>
+        <li>publiez votre art</li>
+        <li>avoir une galerie contenant tous vos arts</li>
+        <li>sélectionnez les objets dont vous intéresse</li>
+        <li>contactez vos clients en privé</li>
+      </ul>
+      <a href="#">Choisissez un forfait</a>
+    </div>
+  </div>
+</div>
+<!-- End Pricing -->
+
+<!-- Start Stats -->
+<div class="stats" id="stats">
+  <h2>Nos chiffres clé</h2>
+  <div class="container">
+    <div class="box">
+      <i class="far fa-user fa-2x fa-fw"></i>
+      <span class="number" data-goal="150" id="clients">0</span>
+      <span class="text">Clients</span>
+    </div>
+    <div class="box">
+      <i class="far fa-user fa-2x fa-fw"></i>
+      <span class="number" data-goal="150" id="artists">0</span>
+      <span class="text">Artistes</span>
+    </div>
+    <div class="box">
+      <i class="fas fa-globe-asia fa-2x fa-fw"></i>
+      <span class="number" data-goal="50" id="countries">1</span>
+      <span class="text">Des pays : </span>tunisia
+    </div>
+  </div>
+</div>
+<!-- End Stats -->
+<!-- Start Discount -->
+<div class="discount" id="discount">
+  <div class="image">
+    <div class="content">
+      <h2>Nous avons une réduction</h2>
+      <p>
+        Chez Upcycle Art, nous apprécions nos fidèles artistes, c'est pourquoi nous proposons un programme de réduction spécial pour montrer notre appréciation.
+        Alors que vous continuez à créer de belles œuvres d'art recyclées et à les partager sur notre galerie en ligne, vous aurez également la possibilité de gagner des points de récompense qui pourront être échangés contre des réductions sur de futurs .
+      </p>
+      <img src="/assets/imgs/discount.png" alt="" />
+    </div>
+  </div>
+  <div class="form">
+    <div class="content">
+      <h2>Demander une remise</h2>
+      <form action="">
+        <input class="input" type="text" placeholder="Votre nom" name="name" />
+        <input class="input" type="email" placeholder="Votre E-mail" name="email" />
+        <input class="input" type="text" placeholder="Ton téléphone" name="mobile" />
+        <textarea class="input" placeholder="Parlez-nous de vos besoins" name="message"></textarea>
+        <input type="submit" value="Envoyer" />
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End Discount -->
+<!-- Start Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="box">
+      <h3>Upcycling Art</h3>
+      <ul class="social">
+        <li>
+          <a href="#" class="facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="youtube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </li>
+      </ul>
+      <p class="text" style="width: 500px;
+    margin-top: 80px;">
+        Termes et conditions : En utilisant notre site, vous acceptez nos termes et conditions.
+        Politique de confidentialité : Notre politique de confidentialité décrit comment nous collectons et utilisons vos informations personnelles.
+      </p>
+    </div>
+    <div class="box">
+      <ul class="links">
+        <li><a href="#">Important Link 1</a></li>
+        <li><a href="#">Important Link 2</a></li>
+        <li><a href="#">Important Link 3</a></li>
+        <li><a href="#">Important Link 4</a></li>
+        <li><a href="#">Important Link 5</a></li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="line">
+        <i class="fas fa-map-marker-alt fa-fw"></i>
+        <div class="info">Tunis, tunis, Manzah 4</div>
+      </div>
+      <div class="line">
+        <i class="far fa-clock fa-fw"></i>
+        <div class="info">Business Hours: 24/7</div>
+      </div>
+      <div class="line">
+        <i class="fas fa-phone-volume fa-fw"></i>
+        <div class="info">
+          <span><a style="color: #2ca033" href="tel:+20123456789">+20123456789</a></span>
+          <span><a style="color: #2ca033" href="tel:+20198765432">+20198765432</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="box footer-gallery">
+      <img alt="" />
+      <img alt="" />
+      <img alt="" />
+      <img alt="" />
+      <img alt="" />
+      <img alt="" />
+    </div>
+  </div>
+  <p class="copyright">Made With &lt;3 By Elzero</p>
+</div>
+<!-- End Footer -->
+

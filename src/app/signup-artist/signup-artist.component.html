@@ -1,0 +1,92 @@
+<div class="container mt-5">
+  <div class="card" style="padding: 20px">
+    <form #signupForm ="ngForm" (ngSubmit)="signup(signupForm)">
+      <label>Name :</label>
+      <input type="text"
+             name="name"
+             id="name"
+             placeholder="enter ur name"
+             ngModel
+             class="form-control" style="width: 50%"
+             required
+      >
+      <br>
+
+      <label>last Name</label>
+      <input type="text"
+             ngModel
+             name="lastname"
+             id="lastname"
+             placeholder="enter ur wallet"
+             class="form-control"
+             class="form-control" style="width: 50%"
+             required
+      >
+      <br>
+      <label>email :</label>
+      <input type="text"
+             ngModel
+             name="email"
+             id="email"
+             placeholder="enter ur email"
+             class="form-control"
+             class="form-control" style="width: 50%"
+             required
+      >
+
+      <br>
+      <label>password :</label>
+      <input type="password"
+             ngModel
+             name="userPassword"
+             id="userPassword"
+             placeholder="enter ur userPassword"
+             class="form-control" style="width: 50%"
+             required
+      >
+      <br>
+      <label>specialite : </label>
+      <input type="text"
+             ngModel
+             name="specialite"
+             id="specialite"
+             placeholder="enter ur specialite"
+             class="form-control"
+             class="form-control" style="width: 50%"
+             required
+      >
+      <br>
+      <label>description : </label>
+      <input type="text"
+             ngModel
+             name="description"
+             id="description"
+             placeholder="enter ur description"
+             class="form-control"
+             class="form-control" style="width: 50%"
+             required
+      >
+
+      <br>
+      <label>CIN : </label>
+      <input type="number"
+             maxlength="8"
+             minlength="8"
+             ngModel
+             name="cin"
+             id="cin"
+             placeholder="enter ur cin"
+             class="form-control"
+             class="form-control" style="width: 50%"
+             required
+      >
+
+
+
+      <hr>
+      <input type="submit" value="signup" class="btn btn-primary form-control rounded-0"
+             style="width: 15%;margin-left: 130px; color: black"
+             [disabled]="signupForm.invalid">
+    </form>
+  </div>
+</div>

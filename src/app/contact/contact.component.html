@@ -1,0 +1,72 @@
+<div class="work-steps" id="work-steps">
+  <h2 style="    font-size: 30px; margin-left: 100px; margin-bottom: 40px;">Contacter nous</h2>
+  <div class="container">
+
+    <div class="info" style="display: flex">
+      <div class="box" style="border-bottom-left-radius: 60px">
+        <div class="form">
+          <div class="content">
+            <form action="" [formGroup]="contactForm">
+              <input class="input" type="text" placeholder="Vous êtes (artiste ou utilisateur)" name="Vous êtes" required formControlName="selectedOption"
+                     [ngStyle]="{'border-color': controls.selectedOption && controls.selectedOption.invalid && controls.selectedOption.touched ? 'red' : ''}"/>
+
+              <input class="input" type="text" placeholder="Votre nom" name="name" required formControlName="name"
+                     [ngStyle]="{'border-color': controls.name && controls.name.invalid && controls.name.touched ? 'red' : ''}"/>
+
+              <input class="input" type="email" placeholder="Votre E-mail" name="email" required formControlName="userName"/>
+              <div *ngIf="controls && controls.userName.touched && controls.userName.invalid" style="margin-top: -18px">
+                <span style="color: red;display: flex">Email invalide</span>
+                <br>
+              </div>
+
+              <input class="input" type="number" placeholder="Ton téléphone" name="mobile" required formControlName="tel"/>
+              <div *ngIf="controls.tel.touched && controls.tel.invalid" style="margin-top: -18px">
+                <span style="color: red;display: flex">votre numéro de téléphone doit contenir 8 chiffres</span>
+                <br>
+              </div>
+
+              <textarea class="input" placeholder="Parlez-nous de vos besoins" name="message" required formControlName="message"
+                        [ngStyle]="{'border-color': controls.message && controls.message.invalid && controls.message.touched ? 'red' : ''}"></textarea>
+
+              <input type="submit" value="Envoyer" [disabled]="contactForm.invalid" (click)="envoyerMail(contactForm)"/>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div style="background-color: #b3e1b3 ; display: block; border-top-right-radius: 60px;" class="box">
+        <h2 class="contact-title">Pour toute demande d’information ou d’assistance, merci de nous contacter :</h2>
+        <div style="display: flex; justify-content: space-between;">
+          <div>
+            <div style="display: flex"><span class="img_reponse"><img alt="Numéro vert" data-entity-type="file" src="/assets/imgs/contact-user.png"></span>
+
+              <div style="display: grid ; margin-left: 8px;"><span class="label_reponse" >Au Numéro vert</span><a class="link_reponse" href="tel:80100092">80 10 00 92</a></div>
+            </div>
+          </div>
+
+
+
+          <div>
+            <div style="display: flex"><span class="img_reponse"><img alt="Email" data-entity-type="file" src="/assets/imgs/mail.png"></span>
+
+              <div  style="display: grid ; margin-left: 8px;"><span class="label_reponse">Par e-mail</span> <a class="link_reponse" href="mailto:digitalteam@biat.com.tn">digitalteam@biat.com.tn</a></div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <h2 class="content_big">Nous sommes ravis d'avoir de vos nouvelles et désireux d'apprendre comment nous pouvons être utiles. Que vous ayez une question ou une préoccupation nous vous encourageons à nous contacter.</h2>
+
+
+
+        <img style="margin-top: -35px" id="imgcontact" src="/assets/imgs/contact.webp" alt="" />
+        <!--<div class="text">
+          <h3>Si vous êtes un simple utilisateur</h3>
+          <p>
+          </p>
+        </div>-->
+      </div>
+
+    </div>
+  </div>
+</div>

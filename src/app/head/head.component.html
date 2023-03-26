@@ -1,0 +1,79 @@
+<div class="header" id="header">
+
+  <div class="container">
+    <a routerLink="/home" style="display: flex ; cursor: pointer"><img style="width: 68px" src="assets/imgs/UpcyclingArt-removebg-preview.png">
+      <h2 class="logo">UpcyclingArt</h2>
+    </a>
+
+    <ul class="main-nav">
+      <li *ngIf="isLogin && isContact && isInscrit">
+        <a style="cursor: pointer">Categorie<i style="margin-left: 5px" class="fa-solid fa-caret-down fa-bounce"></i></a>
+        <div class="mega-menu" style="width: 400px;margin-left: 150px">
+          <ul class="links">
+            <li>
+              <a class="mega-menu-trigger">Utiliser ça<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
+              <div class="mega-menu" style="margin-top: -52px">
+                <ul>
+                  <li><a href="#">Submenu item 1</a></li>
+                  <li><a href="#">Submenu item 2</a></li>
+                  <li><a href="#">Submenu item 3</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a class="mega-menu-trigger">Achetez ça<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
+              <div class="mega-menu" style="margin-top: -52px">
+                <ul>
+                  <li><a href="#">Submenu item 1</a></li>
+                  <li><a href="#">Submenu item 2</a></li>
+                  <li><a href="#">Submenu item 3</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li><a routerLinkActive="active" routerLink="/home" style="cursor: pointer" *ngIf="!isLogin || !isContact || !isInscrit">Home</a></li>
+      <li>
+        <a *ngIf="isContact && isLogin && isInscrit" href="#">Lien Utiles <i style="margin-left: 5px" class="fa-solid fa-caret-down fa-bounce"></i></a>
+        <!-- Start Megamenu -->
+        <div class="mega-menu">
+          <div class="image">
+            <img src="/assets/imgs/megamenu.png" alt="" />
+          </div>
+          <ul class="links">
+            <li>
+              <a href="#testimonials"><i class="far fa-comments fa-fw"></i>Nos artistes</a>
+            </li>
+            <li>
+              <a href="#services"><i class="far fa-building fa-fw"></i>Services</a>
+            </li>
+            <li>
+              <a href="#work-steps"><i class="far fa-clipboard fa-fw"></i>Comment ça fonctionne</a>
+            </li>
+            <li>
+              <a href="#gallery"><i class="fa-solid fa-film fa-fw"></i>Galerie</a>
+            </li>
+          </ul>
+          <ul class="links">
+            <li>
+              <a href="#pricing"><i class="fas fa-server fa-fw"></i>plans tarifaires</a>
+            </li>
+            <li>
+              <a href="#stats"><i class="far fa-chart-bar fa-fw"></i>Statistiques</a>
+            </li>
+            <li>
+              <a href="#discount"><i class="fas fa-percent fa-fw"></i>Demander une remise</a>
+            </li>
+          </ul>
+        </div>
+        <!-- End Megamenu -->
+      </li>
+      <li routerLinkActive="active"  *ngIf="!isLoggedIn()"><a routerLink="/signup" style="cursor: pointer"><span style="margin-right: 8px" class="fa-solid fa-user-plus" ></span>S'insecrire client</a></li>
+      <li routerLinkActive="active" ><a style="cursor: pointer"><span style="margin-right: 8px" class="fa-solid fa-user-plus" ></span>S'insecrire artiste</a></li>
+      <li routerLinkActive="active"  *ngIf="!isLoggedIn()"><a routerLink="/login" style="cursor: pointer"><span style="margin-right: 8px" class="fa-solid fa-right-to-bracket"></span>Se connecter</a></li>
+      <li><div><a routerLinkActive="active" id="contact" routerLink="/contact" style="cursor: pointer">Contactez-nous</a></div></li>
+    </ul>
+  </div>
+</div>
