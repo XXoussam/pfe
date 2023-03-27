@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -32,7 +31,6 @@ import { BeforeAfterComponent } from './home/before-after/before-after.component
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ForbiddenComponent,
     LoginComponent,
     SimpleUserComponent,
@@ -61,7 +59,8 @@ import { BeforeAfterComponent } from './home/before-after/before-after.component
         BrowserAnimationsModule,
         MatIconModule,
         RouterModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -476,7 +476,7 @@
   transition: var(--main-transition);
 }
 .services .box:hover {
-  transform: translateY(-10px);
+ /* transform: translateY(-10px);*/
 }
 .services .box:hover::before {
   width: 100%;

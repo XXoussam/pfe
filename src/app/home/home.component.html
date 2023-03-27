@@ -2,7 +2,7 @@
 <!-- Start Landing -->
 <div class="landing">
   <div class="container">
-    <div class="text">
+    <div class="text" data-aos="fade-right" data-aos-duration="2000">
       <h1>Bienvenue à UpcyclingArt</h1>
       <p>Ici, on donne aux choses une autre vie à vivre. Rejoignez-nous dans notre mission de promouvoir la durabilité et la créativité grâce à l'art de l'upcycling.
       </p>
@@ -20,7 +20,7 @@
 <div class="articles" id="articles">
   <h2 class="main-title">À propos</h2>
   <div style="display: flex">
-    <div class="container">
+    <div class="container" data-aos="fade-right" data-aos-duration="2000">
       <div class="box">
         <div class="content">
           <h3>Qui sommes-nous ?</h3>
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <img style="width: 250px;margin-right: 180px" src="/assets/imgs/chair.png">
+    <img data-aos="fade-left" data-aos-duration="2000" style="width: 250px;margin-right: 180px" src="/assets/imgs/chair.png">
   </div>
 </div>
 <div class="spikes"></div>
@@ -85,7 +85,7 @@
 <div class="testimonials" id="testimonials">
   <h2 class="main-title">Nos Artistes</h2>
   <div class="container">
-    <div class="box">
+    <div class="box"  data-aos="flip-left" data-aos-duration="3000">
       <img src="/assets/imgs/avatar-01.png" alt="" />
       <h3>Mohamed Farag</h3>
       <span class="title">Artiste</span>
@@ -100,7 +100,7 @@
         Je suis un peintre contemporain qui crée des compositions vibrantes et abstraites en utilisant des couleurs vives et des coups de pinceau gestuels.
       </p>
     </div>
-    <div class="box">
+    <div class="box" data-aos="flip-left" data-aos-duration="3000">
       <img src="/assets/imgs/avatar-02.png" alt="" />
       <h3>Mohamed Ibrahim</h3>
       <span class="title">Artiste</span>
@@ -115,7 +115,7 @@
         je suis un sculpteur qui travaille principalement le bronze. Ses pièces sont souvent inspirées par la nature et présentent des détails et des textures complexes.
       </p>
     </div>
-    <div class="box">
+    <div class="box" data-aos="flip-left" data-aos-duration="3000">
       <img src="/assets/imgs/avatar-03.png" alt="" />
       <h3>Shady Nabil</h3>
       <span class="title">Artiste</span>
@@ -144,14 +144,64 @@
       <i class="fas fa-user-shield fa-4x"></i>
       <h3>sécurité</h3>
       <div class="info">
-        <a href="#">Détails</a>
+
+        <a style="cursor:pointer;" data-toggle="modal" data-target="#exampleModalCenter">
+          Détail
+        </a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
     </div>
     <div class="box">
       <i class="fas fa-tools fa-4x"></i>
       <h3>Résolution des problèmes</h3>
       <div class="info">
-        <a href="#">Détails</a>
+
+
+        <a style="cursor:pointer;" data-toggle="modal" data-target="#exampleModalCenter1">
+          Détail
+        </a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle1">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
 
@@ -159,7 +209,30 @@
       <i class="fas fa-bullhorn fa-4x"></i>
       <h3>Commercialisation</h3>
       <div class="info">
-        <a href="#">Détails</a>
+
+        <a style="cursor:pointer;" data-toggle="modal" data-target="#exampleModalCenter2">
+          Détail
+        </a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -170,11 +243,11 @@
 <div class="work-steps" id="work-steps">
   <h2 class="main-title">Comment ça fonctionne ?</h2>
   <div class="container">
-    <img src="/assets/imgs/man-workshop-upcycling-working-fire-surround_625516-1346.avif" alt="" class="image" />
+    <img data-aos="zoom-in-up" data-aos-duration="2000" src="/assets/imgs/man-workshop-upcycling-working-fire-surround_625516-1346.avif" alt="" class="image" />
     <br>
     <br>
     <div class="info" style="display: flex;">
-      <div class="box">
+      <div  data-aos="fade-right" data-aos-duration="2000" class="box">
         <img src="/assets/imgs/work-steps-1.png" alt="" />
         <div class="text">
           <h3>Si vous êtes un artiste</h3>
@@ -183,7 +256,7 @@
           </p>
         </div>
       </div>
-      <div class="box">
+      <div data-aos="fade-left" data-aos-duration="2000" class="box">
         <img src="/assets/imgs/work-steps-2.png" alt="" />
         <div class="text">
           <h3>Si vous êtes un simple utilisateur</h3>
@@ -204,7 +277,7 @@
   <div class="dots dots-down"></div>
   <h2 class="main-title">Forfaits tarifaires</h2>
   <div class="container">
-    <div class="box">
+    <div class="box" data-aos="fade-right">
       <div class="title">Basic pour les utilisateurs simples</div>
       <img src="/assets/imgs/hosting-basic.png" alt="" />
       <div class="price">
@@ -219,7 +292,7 @@
       </ul>
       <a style="margin: 111px auto 40px;" href="#">Choisissez un forfait</a>
     </div>
-    <div class="box">
+    <div class="box" data-aos="fade-left">
       <div class="title">professionnel</div>
       <img src="/assets/imgs/hosting-professional.png" alt="" />
       <div class="price">
@@ -262,7 +335,7 @@
 </div>
 <!-- End Stats -->
 <!-- Start Discount -->
-<div class="discount" id="discount">
+<!--<div class="discount" id="discount">
   <div class="image">
     <div class="content">
       <h2>Nous avons une réduction</h2>
@@ -285,7 +358,7 @@
       </form>
     </div>
   </div>
-</div>
+</div>-->
 <!-- End Discount -->
 <!-- Start Footer -->
 <div class="footer">
@@ -309,8 +382,7 @@
           </a>
         </li>
       </ul>
-      <p class="text" style="width: 500px;
-    margin-top: 80px;">
+      <p class="text" style="width: 700px; margin-top: 143px">
         Termes et conditions : En utilisant notre site, vous acceptez nos termes et conditions.
         Politique de confidentialité : Notre politique de confidentialité décrit comment nous collectons et utilisons vos informations personnelles.
       </p>
@@ -336,21 +408,13 @@
       <div class="line">
         <i class="fas fa-phone-volume fa-fw"></i>
         <div class="info">
-          <span><a style="color: #2ca033" href="tel:+20123456789">+20123456789</a></span>
-          <span><a style="color: #2ca033" href="tel:+20198765432">+20198765432</a></span>
+          <span><a style="color:#b9b9b9" href="tel:+20123456789">+20123456789</a></span>
+          <span><a style="color:#b9b9b9" href="tel:+20198765432">+20198765432</a></span>
         </div>
       </div>
     </div>
-    <div class="box footer-gallery">
-      <img alt="" />
-      <img alt="" />
-      <img alt="" />
-      <img alt="" />
-      <img alt="" />
-      <img alt="" />
-    </div>
   </div>
-  <p class="copyright">Made With &lt;3 By Elzero</p>
+  <p class="copyright">Dans chaque marche avec la nature, on reçoit bien plus que ce qu'on cherche</p>
 </div>
 <!-- End Footer -->
 
