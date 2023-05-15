@@ -118,6 +118,14 @@
   animation-timing-function: ease-out;
   animation-iteration-count: infinite;
 }
+#title{
+  position: absolute;
+  padding-left: 78.5%;
+  padding-top: 25%;
+  z-index: 1;
+  font-size: 40px;
+  max-width: 200px;
+}
 
 @keyframes rotate {
   from {
@@ -135,6 +143,9 @@
   }
 
 }
+
+
+
 /***************************************************************************************************************/
 /* Start Articles */
 

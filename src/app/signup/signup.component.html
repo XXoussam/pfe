@@ -20,10 +20,12 @@
           class="input" type="text" placeholder="Votre nom" name="name"
                formControlName="name"
                required/>
+
         <input [ngStyle]="{'border-color': controls.prenom && controls.prenom.invalid && controls.prenom.touched ? 'red' : ''}"
           class="input" type="text" placeholder="Prenom" name="prenom"
                formControlName="prenom"
                required/>
+
         <input class="input" type="email" placeholder="Votre E-mail" name="email"
                formControlName="userName"
                required/>
@@ -63,32 +65,6 @@
         </div>
         <p style="font-size: 15px;width: 420px;color: red;margin-top: -18px;display: flex" *ngIf="signupForm.hasError('notSame') && controls.userPasswordCnf.touched">Passsword and
           Confirm Password didn't match. </p>
-
-        <select id="mySelect" type="qui" name="selectedOption"
-                [(ngModel)]="selectedOption"
-                formControlName="selectedOption">
-          <option value="" hidden>Tu es ?</option>
-          <option class="option" value="artiste">artiste</option>
-          <br>
-          <hr>
-          <option class="option" value="user">user</option>
-        </select>
-
-        <input [ngStyle]="{'border-color': controls.specialite && controls.specialite.invalid && controls.specialite.touched ? 'red' : ''}"
-          required *ngIf="selectedOption === 'artiste'"
-               class="input" type="text" placeholder="Specialité" name="specialite"
-               formControlName="specialite" />
-        <input [ngStyle]="{'border-color': controls.description && controls.description.invalid && controls.description.touched ? 'red' : ''}"
-          required *ngIf="selectedOption === 'artiste'"
-               class="input" type="text" placeholder="Description" name="description"
-               formControlName="description" />
-        <input required *ngIf="selectedOption === 'artiste'"
-               class="input" type="number" placeholder="CIN" name="cin"
-               formControlName="cin" />
-        <div *ngIf="controls.cin.invalid && controls.cin.touched"  style="margin-top: -18px">
-          <span style="color: red;display: flex">votre numéro cin doit contenir 8 chiffres</span>
-          <br>
-        </div>
 
         <div>
 

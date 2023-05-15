@@ -7,5 +7,7 @@ export class Artist{
   description!:string;
   cin!:string;
   telephone!:string;
+  profileId!:string;
+  profileImg!:string;
 
 }

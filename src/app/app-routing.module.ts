@@ -3,29 +3,35 @@ import { RouterModule, Routes } from '@angular/router';
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import {LoginComponent} from "./login/login.component";
 import {SimpleUserComponent} from "./simple-user/simple-user.component";
-import {ArtistComponent} from "./artist/artist.component";
+import {ArtistComponent} from "./artist-home/artist.component";
 import {AuthGuard} from "./auth/auth.guard";
-import {SignupArtistComponent} from "./signup-artist/signup-artist.component";
 import {SignupComponent} from "./signup/signup.component";
 import {VerifyCodeComponent} from "./verify-code/verify-code.component";
 import {HomeComponent} from "./home/home.component";
-import {HeadComponent} from "./head/head.component";
 import {ContactComponent} from "./contact/contact.component";
-import {AuthGuardVerify} from "./auth/auth-verify.guard";
 import {MyProfileComponent} from "./my-profile/my-profile.component";
+import {AproposComponent} from "./apropos/apropos.component";
+import {SignupArtistComponent} from "./signup-artist/signup-artist.component";
+import {AccueilComponent} from "./accueil/accueil.component";
+import {DiscoverProfileComponent} from "./discover-profile/discover-profile.component";
+import {FollowingComponent} from "./simple-user/following/following.component";
 
 const routes: Routes = [
-  {path: 'homeuser', component: SimpleUserComponent,canActivate:[AuthGuard],data:{roles:['User']}},
-  {path: 'homeartist', component: ArtistComponent,canActivate:[AuthGuard],data:{roles:['Artiste']}},
+  {path: 'profileuser/:id', component: SimpleUserComponent,canActivate:[AuthGuard],data:{roles:['User']}},
+  {path: 'homeartist/:id', component: ArtistComponent,canActivate:[AuthGuard],data:{roles:['Artiste']}},
+  {path: 'accueil', component: AccueilComponent,canActivate:[AuthGuard],data:{roles:['Artiste','User']}},
+  {path: 'visitProfile/:id', component:DiscoverProfileComponent,canActivate:[AuthGuard],data:{roles:['User','Artiste']}},
+  {path: 'following', component:FollowingComponent,canActivate:[AuthGuard],data:{roles:['User','Artiste']}},
   {path: 'login', component: LoginComponent},
   {path: 'forbidden', component: ForbiddenComponent},
-  //{path: 'signupartist', component: SignupArtistComponent},
+  {path: 'signupartist', component: SignupArtistComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'verify', component: VerifyCodeComponent/*, canActivate: [AuthGuardVerify], data: { submitted: false }*/},
   {path: 'home', component: HomeComponent},
-  {path: '', component: HomeComponent},
+  {path: '', redirectTo: '/home',pathMatch:"full"},
   {path: 'contact', component: ContactComponent},
   {path: 'myprofile', component: MyProfileComponent},
+  {path: 'apropos', component: AproposComponent},
 ];
 
 @NgModule({

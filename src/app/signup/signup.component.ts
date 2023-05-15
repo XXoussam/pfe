@@ -3,8 +3,6 @@ import {SimpleUserService} from "../service/simple-user.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {Artist} from "../models/artist";
-import {ArtistService} from "../service/artist.service";
 import {SimpleUser} from "../models/simple-user";
 import {GlobalService} from "../service/global.service";
 
@@ -18,35 +16,23 @@ export class SignupComponent implements OnInit {
 
   showHide = false;
   showHidecf = false;
-  selectedOption: string = "";
   constructor(private spinner:NgxSpinnerService,
               private simpleUserService:SimpleUserService,
               private router:Router,
-              private artistService:ArtistService,
-              private globalService:GlobalService) { }
+              private globalVariable : GlobalService) { }
 
   signupForm = new FormGroup({
     userName : new FormControl('',[Validators.email]),
     userPassword : new FormControl('',[Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]),
     tel : new FormControl('',[Validators.min(10000000),Validators.max(99999999)]),
-    cin : new FormControl('',[Validators.min(10000000),Validators.max(99999999)]),
     name : new FormControl('',[]),
     prenom : new FormControl('',[]),
-    selectedOption : new FormControl('',[]),
-    specialite : new FormControl('',[]),
-    description : new FormControl('',[]),
     userPasswordCnf : new FormControl('',[])
   });
 
 
-
-  checkPasswords(group: FormGroup) {
-    const pass = group.controls['userPassword'].value;
-    const confirmPass = group.controls['userPasswordCnf'].value;
-
-    return pass === confirmPass ? null : { notSame: true };
-  }
   ngOnInit(): void {
+
     // @ts-ignore
     this.signupForm.setValidators(this.checkPasswords);
   }
@@ -70,39 +56,23 @@ export class SignupComponent implements OnInit {
 
   signup(signupForm: FormGroup) {
     /*this.router.navigate(['/verify'], {state: {submitted: true}});*/
-     let user = new Artist();
+    let user = new SimpleUser();
     user.name = signupForm.value.name;
     user.userName = signupForm.value.userName;
     user.userPassword = signupForm.value.userPassword;
     user.lastName = signupForm.value.prenom;
     user.telephone = signupForm.value.tel;
-    user.specialite = signupForm.value.specialite;
-    user.description = signupForm.value.description;
-    user.cin = signupForm.value.cin;
-
     console.log(user)
-    this.globalService.myGlobalVariable = this.selectedOption;
-    if (this.selectedOption === "user"){
       this.simpleUserService.addSimpleUser(user).subscribe(
         (result:SimpleUser)=>{
+          this.globalVariable.myGlobalVariable = 'utilisateurSimple'
+          this.globalVariable.utilisateurSimple = user;
           this.router.navigate(['/verify']);
           console.log(result)
         },error=>{
           alert('this Email already exist')
         }
       )
-    }
-    if (this.selectedOption === "artiste"){
-      this.artistService.addArtist(user).subscribe(
-        (result:Artist)=>{
-          this.router.navigate(['/verify']);
-          console.log(result)
-        },error=>{
-          alert('this Email already exist')
-        }
-      )
-    }
-
   }
 
   get controls(){
@@ -144,5 +114,12 @@ export class SignupComponent implements OnInit {
       document.getElementById("showpasscf").setAttribute('type','password')
       console.log(document.getElementById("showpasscf"))
     }
+  }
+
+  checkPasswords(group: FormGroup) {
+    const pass = group.controls['userPassword'].value;
+    const confirmPass = group.controls['userPasswordCnf'].value;
+
+    return pass === confirmPass ? null : { notSame: true };
   }
 }

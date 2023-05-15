@@ -22,9 +22,7 @@ export class CountDownComponent implements OnInit {
       this.countDownDate = parseInt(storedCountDownDate);
 
     } else {
-      console.log(date);
       date.setMinutes(date.getMinutes()+3);
-      console.log(date);
       this.countDownDate = date.getTime();
       localStorage.setItem('countDownDate', this.countDownDate.toString());
     }
@@ -36,7 +34,6 @@ export class CountDownComponent implements OnInit {
         localStorage.setItem('countDownDate', this.countDownDate.toString());
       }
       const now = new Date().getTime();
-      console.log(this.countDownDate);
       const distance = this.countDownDate - now;
       this.countdown = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) + "m "
         + Math.floor((distance % (1000 * 60)) / 1000) + "s ";

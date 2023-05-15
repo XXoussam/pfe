@@ -1,32 +1,35 @@
+
 <div class="header" id="header">
 
   <div class="container">
-    <a routerLink="/home" style="display: flex ; cursor: pointer"><img style="width: 68px" src="assets/imgs/UpcyclingArt-removebg-preview.png">
+    <a routerLink="/home" style="display: flex ; cursor: pointer"><img style="width: 55px;margin-bottom: 5px" src="assets/imgs/UpcyclingArt-removebg-preview.png">
       <h2 class="logo">UpcyclingArt</h2>
     </a>
 
     <ul class="main-nav">
-      <li *ngIf="isLogin && isContact && isInscrit">
+      <li *ngIf="isHome && !isLoggedIn() && isContact && isInscrit && isInscritArtist">
         <a style="cursor: pointer">Categorie<i style="margin-left: 5px" class="fa-solid fa-caret-down fa-bounce"></i></a>
         <div class="mega-menu" style="width: 400px;margin-left: 150px">
           <ul class="links">
             <li>
-              <a class="mega-menu-trigger">Utiliser ça<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
+              <a class="mega-menu-trigger">Matières premières<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
               <div class="mega-menu" style="margin-top: -52px">
                 <ul>
-                  <li><a href="#">Submenu item 1</a></li>
-                  <li><a href="#">Submenu item 2</a></li>
-                  <li><a href="#">Submenu item 3</a></li>
+                  <li><a href="#">Fer</a></li>
+                  <li><a href="#">Bois</a></li>
+                  <li><a href="#">Aliminum</a></li>
+                  <li><a href="#">Matériaux de peinture</a></li>
                 </ul>
               </div>
             </li>
             <li>
-              <a class="mega-menu-trigger">Achetez ça<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
+              <a class="mega-menu-trigger">Nos oeuvres<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
               <div class="mega-menu" style="margin-top: -52px">
                 <ul>
-                  <li><a href="#">Submenu item 1</a></li>
-                  <li><a href="#">Submenu item 2</a></li>
-                  <li><a href="#">Submenu item 3</a></li>
+                  <li><a href="#">les peintures</a></li>
+                  <li><a href="#">Art du bois</a></li>
+                  <li><a href="#">Art du fer</a></li>
+                  <li><a href="#">Art d'Aluminum</a></li>
                 </ul>
               </div>
             </li>
@@ -34,9 +37,9 @@
         </div>
       </li>
 
-      <li><a routerLinkActive="active" routerLink="/home" style="cursor: pointer" *ngIf="!isLogin || !isContact || !isInscrit">Home</a></li>
+      <li><a routerLink="/home" style="cursor: pointer" *ngIf="!isHome || !isContact || !isInscrit || !isInscritArtist">Home</a></li>
       <li>
-        <a *ngIf="isContact && isLogin && isInscrit" href="#">Lien Utiles <i style="margin-left: 5px" class="fa-solid fa-caret-down fa-bounce"></i></a>
+        <a *ngIf="isContact && isHome && !isLoggedIn() && isInscrit && isInscritArtist" href="#">Lien Utiles <i style="margin-left: 5px" class="fa-solid fa-caret-down fa-bounce"></i></a>
         <!-- Start Megamenu -->
         <div class="mega-menu">
           <div class="image">
@@ -70,10 +73,73 @@
         </div>
         <!-- End Megamenu -->
       </li>
-      <li routerLinkActive="active"  *ngIf="!isLoggedIn()"><a routerLink="/signup" style="cursor: pointer"><span style="margin-right: 8px" class="fa-solid fa-user-plus" ></span>S'insecrire client</a></li>
-      <li routerLinkActive="active" ><a style="cursor: pointer"><span style="margin-right: 8px" class="fa-solid fa-user-plus" ></span>S'insecrire artiste</a></li>
-      <li routerLinkActive="active"  *ngIf="!isLoggedIn()"><a routerLink="/login" style="cursor: pointer"><span style="margin-right: 8px" class="fa-solid fa-right-to-bracket"></span>Se connecter</a></li>
-      <li><div><a routerLinkActive="active" id="contact" routerLink="/contact" style="cursor: pointer">Contactez-nous</a></div></li>
+      <li *ngIf="!isLoggedIn()">
+        <a routerLink="/signup" routerLinkActive="active-link" style="cursor: pointer">
+          <span style="margin-right: 8px" class="fa-solid fa-user-plus" >
+
+          </span>Devenir client
+        </a>
+      </li>
+      <li *ngIf="!isLoggedIn()">
+        <a routerLink="/signupartist" routerLinkActive="active-link" style="cursor: pointer">
+          <span style="margin-right: 8px" class="fa-solid fa-user-plus" >
+
+          </span>Devenir artiste</a>
+      </li>
+
+      <li  *ngIf="!isLoggedIn()">
+        <a routerLink="/login" routerLinkActive="active-link" style="cursor: pointer">
+          <span style="margin-right: 8px" class="fa-solid fa-right-to-bracket">
+
+          </span>Se connecter
+        </a>
+      </li>
+
+      <li  *ngIf="isLoggedIn()">
+        <a routerLinkActive="active-link" routerLink="/accueil" style="cursor: pointer">
+          <span style="margin-right: 8px" class="fa-solid fa-house">
+
+          </span> Accueil
+        </a>
+      </li>
+
+      <li  *ngIf="isLoggedIn()">
+        <a routerLinkActive="active-link" [routerLink]="canAccess ? '/homeartist/'+profileId : '/profileuser/'+profileId" style="cursor: pointer">
+          <span style="margin-right: 8px" class="fa-solid fa-user">
+          </span> Profile
+        </a>
+      </li>
+
+      <li *ngIf="isLoggedIn()" class="dropdown" [class.open]="isDropdownOpen">
+        <a routerLinkActive="active-link" style="cursor: pointer" (click)="toggleDropdown($event)">
+          <i class="fa-regular fa-bell" style="font-size: 21px" (click)="setLastNotifDate()">
+            <span *ngIf="unreadNotif.length!=0" class="notification-count">{{unreadNotif.length}}</span>
+          </i>
+        </a>
+        <ul class="dropdown-menu">
+
+          <div class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header"  *ngFor="let notifi of unreadNotif">
+            <div class="dropdown-list-image mr-3">
+              <img class="rounded-circle" [src]="notifi.img" alt="">
+            </div>
+            <div class="font-weight-bold mr-3">
+              <div class="text-truncate">{{notifi.date}}</div>
+              <div class="small">{{notifi.description}}</div>
+            </div>
+          </div>
+          <!-- Add more list items for additional notifications -->
+        </ul>
+      </li>
+
+      <li  *ngIf="isLoggedIn()" (click)="logout()">
+        <a routerLinkActive="active-link" style="cursor: pointer">
+          <span style="margin-right: 8px" class="fa-solid fa-right-from-bracket">
+          </span> Se déconnecter
+        </a>
+      </li>
+      <li><div><a id="contact" routerLink="/contact" style="cursor: pointer">Contactez-nous</a></div></li>
     </ul>
   </div>
 </div>
+
+

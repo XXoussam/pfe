@@ -3,4 +3,6 @@ export class SimpleUser{
   lastName!:string;
   userName!:string;
   userPassword!:string;
+  telephone!:string;
+  profileImg!:string;
 }

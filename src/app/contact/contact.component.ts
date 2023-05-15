@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageDTO} from "../models/messageDTO";
 import {ContactService} from "../service/contact.service";
-import {SimpleUser} from "../models/simple-user";
-import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-contact',
@@ -19,7 +18,7 @@ export class ContactComponent implements OnInit {
     message : new FormControl('',[]),
   });
 
-  constructor(private contactService:ContactService) { }
+  constructor(private contactService:ContactService) {}
 
   ngOnInit(): void {
   }

@@ -112,4 +112,67 @@ body {
   }
 }
 
+.description{
+  margin-left: 130px;
+  margin-top: 100px;
+  font-size: 21px;
+  line-height: 1.7;
+  color: #666;
+  max-width: 500px;
+}
 
+
+.first_img{
+  display: flex;
+  margin-left: 40px;
+}
+
+.second_img{
+  display: flex;
+  justify-content: space-between;
+}
+
+#image-comparison-slider2{
+  right: 3%;
+}
+
+@media screen and (max-width: 1200px){
+  .first_img{
+    display: block;
+    margin-left: 0;
+  }
+
+  .description{
+    margin-left: 6%;
+    margin-top: 100px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #666;
+    max-width: 80%;
+  }
+
+  #image-comparison-slider{
+    width: 100%;
+  }
+
+  .second_img{
+    display: block;
+  }
+
+  [data-aos] {
+      opacity: 1 !important;
+      transform: none !important;
+  }
+
+  #image-comparison-slider2{
+    width: 100%;
+    right: 0;
+  }
+
+  #tortueDescription{
+    top: 500px;
+  }
+
+
+
+}
