@@ -9,7 +9,6 @@ import {SignupComponent} from "./signup/signup.component";
 import {VerifyCodeComponent} from "./verify-code/verify-code.component";
 import {HomeComponent} from "./home/home.component";
 import {ContactComponent} from "./contact/contact.component";
-import {MyProfileComponent} from "./my-profile/my-profile.component";
 import {AproposComponent} from "./apropos/apropos.component";
 import {SignupArtistComponent} from "./signup-artist/signup-artist.component";
 import {AccueilComponent} from "./accueil/accueil.component";
@@ -31,7 +30,6 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: '', redirectTo: '/home',pathMatch:"full"},
   {path: 'contact', component: ContactComponent},
-  {path: 'myprofile', component: MyProfileComponent},
   {path: 'apropos', component: AproposComponent},
 ];
 

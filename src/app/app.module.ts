@@ -19,12 +19,6 @@ import { HomeComponent } from './home/home.component';
 import { HeadComponent } from './head/head.component';
 import { ContactComponent } from './contact/contact.component';
 import {Router, RouterModule} from "@angular/router";
-import { AproposProfileComponent } from './my-profile/apropos-profile/apropos-profile.component';
-import { MyProfileComponent } from './my-profile/my-profile.component';
-import { PostProfileComponent } from './my-profile/post-profile/post-profile.component';
-import { GalerieProfileComponent } from './my-profile/galerie-profile/galerie-profile.component';
-import { CreatePostComponent } from './my-profile/create-post/create-post.component';
-import { TopProfileComponent } from './my-profile/top-profile/top-profile.component';
 import { CarouselComponent } from './home/carousel/carousel.component';
 import { BeforeAfterComponent } from './home/before-after/before-after.component';
 import { SlideBarComponent } from './home/slide-bar/slide-bar.component';
@@ -60,12 +54,6 @@ import { MessagesComponent } from './messages/messages.component';
     HomeComponent,
     HeadComponent,
     ContactComponent,
-    AproposProfileComponent,
-    MyProfileComponent,
-    PostProfileComponent,
-    GalerieProfileComponent,
-    CreatePostComponent,
-    TopProfileComponent,
     CarouselComponent,
     BeforeAfterComponent,
     SlideBarComponent,
