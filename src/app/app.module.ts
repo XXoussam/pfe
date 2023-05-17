@@ -43,6 +43,7 @@ import { AccueilPostComponent } from './accueil/accueil-post/accueil-post.compon
 import {FollowersComponent} from "./simple-user/followers/followers.component";
 import {FollowingArtistComponent} from "./artist-home/following-artist/following-artist.component";
 import { FollowerArtistComponent } from './artist-home/follower-artist/follower-artist.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { FollowerArtistComponent } from './artist-home/follower-artist/follower-
     AccueilPostComponent,
     FollowingArtistComponent,
     FollowersComponent,
-    FollowerArtistComponent
+    FollowerArtistComponent,
+    MessagesComponent
   ],
     imports: [
         BrowserModule,

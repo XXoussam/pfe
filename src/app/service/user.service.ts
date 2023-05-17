@@ -87,4 +87,9 @@ export class UserService {
     return this.http.post<any>(`${this.apiServerUrl}/notification/setLastNotifDate`,null,{ headers });
   }
 
+  checkIfFollowed(profileId:string): Observable<boolean>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}`}; // replace `jwt` with your actual JWT value
+    return this.http.get<boolean>(`${this.apiServerUrl}/checkFollowers/`+profileId,{ headers });
+  }
+
 }

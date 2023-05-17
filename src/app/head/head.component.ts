@@ -4,6 +4,8 @@ import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {UserService} from "../service/user.service";
 import {GlobalService} from "../service/global.service";
 import {interval, Subject, switchMap, takeUntil} from "rxjs";
+import {PublicationService} from "../service/publication.service";
+import {Publication} from "../models/publication";
 
 @Component({
   selector: 'app-head',
@@ -21,8 +23,9 @@ export class HeadComponent implements OnInit {
   isDropdownOpen: boolean = false;
   unreadNotif:any[]=[];
 
+
   constructor(private userAuthService:UserAuthService,private userService:UserService,
-              private router:Router) { }
+              private router:Router,private pubService:PublicationService) { }
 
   ngOnInit(): void {
 
@@ -113,20 +116,20 @@ export class HeadComponent implements OnInit {
 private pauseSubject = new Subject<void>();
 
   getUnreadNotification() {
-    interval(1000)
+   /* interval(700)
       .pipe(
         switchMap(() => this.userService.getUnreadNotif()),
         takeUntil(this.pauseSubject) // Stop polling when pauseSubject emits a value
       )
       .subscribe(
         (response) => {
-          console.log(response);
+          //console.log(response);
           this.unreadNotif = response;
         },
         (error) => {
           console.log(error);
         }
-      );
+      );*/
   }
 
 // Method to pause the polling
@@ -150,4 +153,40 @@ private pauseSubject = new Subject<void>();
       }
     )
   }
+
+  getPostForComment(idContenu:number){
+    this.pubService.getPubForComment(idContenu).subscribe(
+      (response)=>{
+        console.log(response)
+      },error => {
+        console.log(error)
+      }
+    )
+  }
+
+  getdetails(notifi: any) {
+    let list:string[]=notifi.description.split(' ');
+   if (list.includes('following')||list.includes('liked')){
+     this.router.navigate(["/visitProfile",notifi.ownerProfileId])
+   }else {
+     this.getPostForComment(notifi.idContenue)
+     this.router.navigate(["/homeartist",localStorage.getItem("ProfileId")])
+
+     setTimeout(() => {
+       const targetPostId = notifi.idContenue;
+       const targetPostElement = document.getElementById(targetPostId);
+       console.log(notifi.idContenue)
+       if (targetPostElement) {
+         targetPostElement.scrollIntoView({ behavior: "smooth" });
+       }
+       // Code to execute after waiting for a second
+       // Add your desired code here
+     }, 150); // 1000 milliseconds = 1 second
+     //const button = document.getElementById("myButton") as HTMLButtonElement;
+
+
+
+   }
+  }
+
 }

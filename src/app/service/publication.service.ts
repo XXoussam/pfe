@@ -67,8 +67,10 @@ export class PublicationService {
     return this.http.get<any[]>(`${this.apiServerUrl}/likes/getAllLikesNames/`+idContPub, { headers });
   }
 
-
-
+  getPubForComment(idContenu:number):Observable<Publication>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}` }; // replace `jwt` with your actual JWT value
+    return this.http.get<Publication>(`${this.apiServerUrl}/publication/getPubForComment/`+idContenu, { headers });
+  }
 
 
 

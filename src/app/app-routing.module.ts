@@ -15,13 +15,14 @@ import {SignupArtistComponent} from "./signup-artist/signup-artist.component";
 import {AccueilComponent} from "./accueil/accueil.component";
 import {DiscoverProfileComponent} from "./discover-profile/discover-profile.component";
 import {FollowingComponent} from "./simple-user/following/following.component";
+import {MessagesComponent} from "./messages/messages.component";
 
 const routes: Routes = [
   {path: 'profileuser/:id', component: SimpleUserComponent,canActivate:[AuthGuard],data:{roles:['User']}},
   {path: 'homeartist/:id', component: ArtistComponent,canActivate:[AuthGuard],data:{roles:['Artiste']}},
   {path: 'accueil', component: AccueilComponent,canActivate:[AuthGuard],data:{roles:['Artiste','User']}},
   {path: 'visitProfile/:id', component:DiscoverProfileComponent,canActivate:[AuthGuard],data:{roles:['User','Artiste']}},
-  {path: 'following', component:FollowingComponent,canActivate:[AuthGuard],data:{roles:['User','Artiste']}},
+  {path: 'messages', component:MessagesComponent,canActivate:[AuthGuard],data:{roles:['User','Artiste']}},
   {path: 'login', component: LoginComponent},
   {path: 'forbidden', component: ForbiddenComponent},
   {path: 'signupartist', component: SignupArtistComponent},
