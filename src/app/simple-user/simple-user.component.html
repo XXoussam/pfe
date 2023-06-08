@@ -1,6 +1,4 @@
 
-
-
 <div class="container">
   <div class="profile-page tx-13">
     <div class="row">
@@ -9,7 +7,7 @@
           <div class="cover">
             <div class="gray-shade"></div>
             <figure>
-              <img src="https://bootdey.com/img/Content/bg1.jpg" class="img-fluid" alt="profile cover">
+              <img style="height: 25rem" [src]="currentSimpleUser.backProfileImg" class="img-fluid" alt="profile cover">
             </figure>
             <div class="cover-body d-flex justify-content-between align-items-center">
               <div>
@@ -17,7 +15,7 @@
                 <span class="profile-name">{{currentSimpleUser.name}} {{currentSimpleUser.lastName}}</span>
               </div>
               <div class="d-none d-md-block">
-                <button class="btn btn-primary btn-icon-text btn-edit-profile">
+                <button class="btn btn-primary btn-icon-text btn-edit-profile" data-toggle="modal" data-target="#editModal">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit btn-icon-prepend">
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -52,13 +50,13 @@
                 </svg>
                 <a style="cursor: pointer" (click)="displayFollowers()" class="pt-1px d-none d-md-block">Followers <span class="text-muted tx-12">{{nbrFollowers}}</span></a>
               </li>
-              <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+              <li id="gallery" class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image mr-1 icon-md">
                   <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                   <circle cx="8.5" cy="8.5" r="1.5"></circle>
                   <polyline points="21 15 16 10 5 21"></polyline>
                 </svg>
-                <a class="pt-1px d-none d-md-block" href="#">Photos</a>
+                <a style="cursor: pointer" (click)="showGallery()" class="pt-1px d-none d-md-block">Gallery</a>
               </li>
             </ul>
           </div>
@@ -67,11 +65,15 @@
     </div>
     <div class="row profile-body">
       <!-- left wrapper start -->
-      <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
+      <div *ngIf="!displayGallery" class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
         <div class="card rounded">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
-              <h6 class="card-title mb-0">About</h6>
+              <h5 class="card-title mb-0">About
+                <i *ngIf="getElementDisplay('about') === 'none'" class="fa fa-plus-square edit-bio" aria-hidden="true" (click)="show('about')"></i>
+                <i *ngIf="getElementDisplay('about') !== 'none'" class="fa fa-minus-square minus" aria-hidden="true" (click)="hide('about')"></i>
+              </h5>
+
               <div class="dropdown">
                 <button class="btn p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal icon-lg text-muted pb-3px">
@@ -100,22 +102,40 @@
                 </div>
               </div>
             </div>
-            <p>Hi! I'm Amiah the Senior UI Designer at Vibrant. We hope you enjoy the design and quality of Social.</p>
+
+
+            <p *ngIf="getElementDisplay('about') === 'none'">{{about}}</p>
+            <div class="input-group" id="about" style="display: none">
+              <span>
+              <textarea required class="form-control" style="margin-bottom: 4px;" aria-label="With textarea" [(ngModel)]="about"></textarea>
+              <i class="fa fa-check-square check" aria-hidden="true" (click)="saveAbout()"></i>
+                <i class="fa fa-times-circle cancel" aria-hidden="true" (click)="clear('about')"></i>
+              </span>
+            </div>
             <div class="mt-3">
               <label class="tx-11 font-weight-bold mb-0 text-uppercase">Joined:</label>
               <p class="text-muted">November 15, 2015</p>
             </div>
+
+
+
+
             <div class="mt-3">
-              <label class="tx-11 font-weight-bold mb-0 text-uppercase">Lives:</label>
-              <p class="text-muted">New York, USA</p>
-            </div>
-            <div class="mt-3">
-              <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
-              <p class="text-muted">{{currentSimpleUser.userName}}</p>
-            </div>
-            <div class="mt-3">
-              <label class="tx-11 font-weight-bold mb-0 text-uppercase">Website:</label>
-              <p class="text-muted">www.nobleui.com</p>
+              <label class="tx-11 font-weight-bold mb-0 text-uppercase">Website:
+                <i *ngIf="getElementDisplay('website') === 'none'" class="fa fa-plus-square edit-bio" aria-hidden="true" (click)="show('website')"></i>
+                <i *ngIf="getElementDisplay('website') !== 'none'" class="fa fa-minus-square minus" aria-hidden="true" (click)="hide('website')"></i>
+              </label>
+              <br>
+              <a [href]="website" target="_blank" *ngIf="getElementDisplay('website') === 'none'">{{website}}</a>
+              <div class="input-group mb-3" id="website" style="display: none">
+                <span>
+                <input type="text" class="form-control" style="margin-bottom: 4px;" aria-label="Default" aria-describedby="inputGroup-sizing-default" [(ngModel)]="website">
+                <i class="fa fa-check-square check" aria-hidden="true" (click)="saveWebsite()"></i>
+                <i class="fa fa-times-circle cancel" aria-hidden="true" (click)="clear('website')"></i>
+                  </span>
+              </div>
+
+
             </div>
             <div class="mt-3 d-flex social-links">
               <a href="javascript:;" class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon github">
@@ -240,14 +260,19 @@
 
 
 
-          <div *ngIf="!display && !displayFollower" class="col-md-12">
+          <div *ngIf="!display && !displayFollower && !displayGallery" class="col-md-12">
               <app-following (nbrFollowing)="handleVariableFollowing($event)"></app-following>
           </div>
-          <div *ngIf="!display && displayFollower" class="col-md-12">
+          <div *ngIf="!display && displayFollower && !displayGallery" class="col-md-12">
             <app-followers (nbrFollowers)="handleVariableFollower($event)"></app-followers>
           </div>
         </div>
       </div>
+
+      <div *ngIf="!display && !displayFollower && displayGallery">
+        <app-galery [postsByOwner]="postsByOwner"></app-galery>
+      </div>
+
       <!-- middle wrapper end -->
       <!-- right wrapper start -->
       <div *ngIf="display" class="d-none d-xl-block col-xl-3 right-wrapper">
@@ -311,6 +336,69 @@
         </div>
       </div>
       <!-- right wrapper end -->
+    </div>
+  </div>
+</div>
+
+
+<!--edit profile Modal-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="margin-top: 15%;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit your profile and save changes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control"
+                   [(ngModel)]="currentSimpleUser.name"
+                   id="name"
+                   name="name"
+                   placeholder="Enter name">
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">lastName</label>
+            <input type="text" class="form-control"
+                   id="lastName"
+                   name="lastName"
+                   placeholder="Enter lastName"
+                   [(ngModel)]="currentSimpleUser.lastName">
+          </div>
+
+          <div class="form-group">
+            <label for="profileImg">profile Img</label>
+            <input type="text" class="form-control"
+                   id="profileImg"
+                   name="profileImg"
+                   placeholder="Enter Img url"
+                   [(ngModel)]="currentSimpleUser.profileImg">
+          </div>
+
+          <div class="form-group">
+            <label for="backProfileImg">backProfileImg</label>
+            <input type="text" class="form-control"
+                   id="backProfileImg"
+                   name="backProfileImg"
+                   placeholder="Enter Img url"
+                   [(ngModel)]="currentSimpleUser.backProfileImg">
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" (click)="closeModal()">Save changes</button>
+          </div>
+        </form>
+
+      </div>
+
     </div>
   </div>
 </div>

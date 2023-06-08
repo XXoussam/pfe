@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {FileHandle} from "../models/FileHandle";
 import {Publication} from "../models/publication";
 import {DomSanitizer} from "@angular/platform-browser";
 import {PublicationService} from "../service/publication.service";
-import {Image} from "../models/image";
-import {contenue} from "../models/contenue";
 import {GlobalService} from "../service/global.service";
-import {Artist} from "../models/artist";
 import {UserService} from "../service/user.service";
-import {ActivatedRoute} from "@angular/router";
-import {error} from "highcharts";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ArtistService} from "../service/artist.service";
+import {ChatService} from "../service/chat.service";
+import {error} from "highcharts";
 
 @Component({
   selector: 'app-discover-profile',
@@ -24,11 +21,14 @@ export class DiscoverProfileComponent implements OnInit {
   profileId="";
   profile:any;
   isFollowed!:boolean;
+  display: boolean=true;
+  displayGallery: boolean=false;
+  currentStar!: number;
 
 
   constructor(private sanitizer: DomSanitizer,private globalService : GlobalService,private route: ActivatedRoute,
               private publicationService:PublicationService,private userService:UserService,
-              private artistService:ArtistService) { }
+              private artistService:ArtistService,private chatService:ChatService,private router:Router) { }
 
   ngOnInit(): void {
 
@@ -44,6 +44,7 @@ export class DiscoverProfileComponent implements OnInit {
     console.log(this.postsByOwner)
 
     this.checkFollowed(this.profileId)
+
   }
 
   getPubByProfileId(profileId:string){
@@ -62,6 +63,7 @@ export class DiscoverProfileComponent implements OnInit {
       (response)=>{
         console.log(response)
         this.profile = response;
+        this.currentStar=Math.round(response.ratingStars);
       },error => {
         console.log(error)
       }
@@ -83,6 +85,7 @@ export class DiscoverProfileComponent implements OnInit {
   checkFollowed(profileId:string){
     this.userService.checkIfFollowed(profileId).subscribe(
       (response)=>{
+        console.log(profileId)
         console.log(response)
         if (response){
           this.isFollowed=true;
@@ -106,4 +109,76 @@ export class DiscoverProfileComponent implements OnInit {
 
   }
 
+  OpenChat(profileId: string) {
+    this.chatService.openChat(profileId).subscribe(
+      (response)=>{
+        console.log(response)
+        this.router.navigate(["/messages"])
+      },error=>{
+        console.log(error)
+      }
+    )
+  }
+
+  showGallery() {
+    this.display=false;
+    this.displayGallery=true;
+
+    const elements = document.querySelectorAll('.header-link-item');
+    elements.forEach(element => {
+      element.classList.remove('active');
+    });
+    const timeLine = document.getElementById("gallery");
+    // @ts-ignore
+    timeLine.classList.add("active")
+  }
+
+  displayTimeLine() {
+    this.display=true;
+    this.displayGallery=false;
+    const elements = document.querySelectorAll('.header-link-item');
+    elements.forEach(element => {
+      element.classList.remove('active');
+    });
+    const timeLine = document.getElementById("timeLine");
+    // @ts-ignore
+    timeLine.classList.add("active")
+  }
+
+  checkIfChatExist():boolean{
+    if (this.profile.chats.length>0){
+      for (const profileElement of this.profile.chats) {
+        if (profileElement.chatCode){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /************* stars ********************/
+
+
+  highlightStars(starIndex: number): void {
+    this.currentStar = starIndex;
+  }
+
+  resetStars(): void {
+    this.currentStar = Math.round(this.profile.ratingStars);
+  }
+
+
+  rateArtist(i: number) {
+    this.currentStar=i;
+    this.artistService.rateArtist(this.profileId,i+1).subscribe(
+      (response)=>{
+        console.log(response)
+        this.fetchByIdProfile(this.profileId)
+      },error=>{
+        console.log(error)
+      }
+    )
+  }
 }
+
+

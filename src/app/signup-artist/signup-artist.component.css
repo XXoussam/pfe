@@ -5,7 +5,6 @@
 }
 
 .discount .image {
-  background-image: url(/src/assets/imgs/discount-background1.jpg);
   background-size: cover;
   color: white;
   flex-basis: 50%;
@@ -14,7 +13,6 @@
   justify-content: center;
   position: relative;
   z-index: 1;
-  animation: change-background 10s linear infinite;
 }
 .discount .image::before {
   content: "";
@@ -25,7 +23,6 @@
   height: 100%;
   background-color: rgb(225, 211, 188);
   z-index: -1;
-  border-top-right-radius: 280px;
 }
 @media (max-width: 991px) {
   .discount .image {
@@ -53,6 +50,7 @@
   border-bottom: 1px solid #ccc;
   background-color: #f9f9f9;
   caret-color: var(--main-color);
+  border-radius: 6px;
 }
 .discount .form textarea.input {
   resize: none;
@@ -105,13 +103,34 @@
   caret-color: var(--main-color);
 }
 
-#btnInscrit{
-  width: 270px;
-  border-radius: 8px;
-  display: table-cell;
-}
 
 .option{
   font-size: 18px;
   background-color: rgba(65, 124, 175, 0.37);
 }
+
+#alert-subs{
+  width: 70%;
+  margin-left: 15%;
+}
+
+.alert-animation {
+  animation-name: slideIn;
+  animation-duration: 1s;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+
+#shape-bg{
+  transform: rotate(-95deg);
+  margin: -56.5rem -35rem 0 0;
+}
+

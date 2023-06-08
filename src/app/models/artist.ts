@@ -9,5 +9,6 @@ export class Artist{
   telephone!:string;
   profileId!:string;
   profileImg!:string;
+  id!: number;
 
 }

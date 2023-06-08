@@ -245,3 +245,30 @@ img {
   margin-left: 6%;
   position: absolute;
 }
+
+/************* rating *************/
+
+
+.rating {
+  display: grid;
+  height: 4rem;
+  margin-top: 1rem;
+}
+
+.stars{
+  display: grid;
+  grid-template-columns: repeat(5, 0fr);
+  column-gap: 5px;
+  font-size: 18px;
+  margin-left: 17px;
+}
+
+.fa-star {
+  transition: color 0.3s ease;
+}
+
+.fa-star:hover,
+.fa-star:hover ~ .fa-star {
+  color: gold;
+}
+

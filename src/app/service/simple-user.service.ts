@@ -56,4 +56,21 @@ export class SimpleUserService {
     const headers = { Authorization: `Bearer ${(this.jwt)}` };
     return this.http.delete<any>(`${this.apiServerUrl}/utilisateurSimple/deletefollower/`+profileId,{headers});
   }
+
+  getAllSimpleUserDTOS(): Observable<any[]>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}` }; // replace `jwt` with your actual JWT value
+    return this.http.get<any[]>(`${this.apiServerUrl}/utilisateurSimple/getallDTOS`,{ headers });
+  }
+
+  modifyAbout(about:string):Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}` };
+    return this.http.post<any>(`${this.apiServerUrl}/utilisateurSimple/modifyDescription`,
+      about,{ headers });
+  }
+
+  modifyWebsite(url:string):Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}` };
+    return this.http.post<any>(`${this.apiServerUrl}/utilisateurSimple/modifyWebsite`,
+      url,{ headers });
+  }
 }

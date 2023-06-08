@@ -245,3 +245,49 @@ img {
   margin-left: 6%;
   position: absolute;
 }
+
+.edit-bio{
+  font-size: 20px;
+  color: #0fa8f5;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.check{
+  color: green;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.cancel{
+  font-size: 20px;
+  color: red;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.minus{
+  margin-left: 4px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/************* rating *************/
+
+
+.rating {
+  display: grid;
+  height: 4rem;
+  margin-top: 1rem;
+}
+
+.stars{
+  display: grid;
+  grid-template-columns: repeat(5, 0fr);
+  column-gap: 5px;
+  font-size: 18px;
+  margin-left: 17px;
+}
+
+
+

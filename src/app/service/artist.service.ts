@@ -61,6 +61,17 @@ export class ArtistService {
     return this.http.delete<any>(`${this.apiServerUrl}/artiste/deleteFollower/`+profileId,{headers});
   }
 
+  addwithstripe():Observable<Artist>{
+    return this.http.post<Artist>(`${this.apiServerUrl}/api/abonnement/addwithstripe`,null,
+      {headers:this.requestHeader});
+  }
+
+  rateArtist(profileId:string,stars:number):Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}` };
+    return this.http.post<any>(`${this.apiServerUrl}/artiste/rating/${profileId}/${stars}`,null,
+      {headers});
+  }
+
 
 
 }

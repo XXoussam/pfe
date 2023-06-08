@@ -1,35 +1,35 @@
 
 <div class="header" id="header">
 
-  <div class="container">
+  <div class="container" [ngStyle]="{'max-width': isLoggedIn() ? '1210px' : '1170px'}">
     <a routerLink="/home" style="display: flex ; cursor: pointer"><img style="width: 55px;margin-bottom: 5px" src="assets/imgs/UpcyclingArt-removebg-preview.png">
       <h2 class="logo">UpcyclingArt</h2>
     </a>
 
     <ul class="main-nav">
       <li *ngIf="isHome && !isLoggedIn() && isContact && isInscrit && isInscritArtist">
-        <a style="cursor: pointer">Categorie<i style="margin-left: 5px" class="fa-solid fa-caret-down fa-bounce"></i></a>
-        <div class="mega-menu" style="width: 400px;margin-left: 150px">
+        <a style="cursor: pointer">category<i style="margin-left: 5px" class="fa-solid fa-caret-down fa-bounce"></i></a>
+        <div class="mega-menu" style="width: 400px;margin-left: 28rem;">
           <ul class="links">
             <li>
-              <a class="mega-menu-trigger">Matières premières<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
+              <a class="mega-menu-trigger">Raw materials<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
               <div class="mega-menu" style="margin-top: -52px">
                 <ul>
-                  <li><a href="#">Fer</a></li>
-                  <li><a href="#">Bois</a></li>
-                  <li><a href="#">Aliminum</a></li>
-                  <li><a href="#">Matériaux de peinture</a></li>
+                  <li><a href="#">Iron</a></li>
+                  <li><a href="#">Wood</a></li>
+                  <li><a href="#">Aluminum</a></li>
+                  <li><a href="#">paint materials</a></li>
                 </ul>
               </div>
             </li>
             <li>
-              <a class="mega-menu-trigger">Nos oeuvres<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
+              <a class="mega-menu-trigger">Our works<i style="margin-left: 5px" class="fa-solid fa-caret-right"></i></a>
               <div class="mega-menu" style="margin-top: -52px">
                 <ul>
-                  <li><a href="#">les peintures</a></li>
-                  <li><a href="#">Art du bois</a></li>
-                  <li><a href="#">Art du fer</a></li>
-                  <li><a href="#">Art d'Aluminum</a></li>
+                  <li><a href="#">the paintings</a></li>
+                  <li><a href="#">wood art</a></li>
+                  <li><a href="#">Iron art</a></li>
+                  <li><a href="#">Aluminum art</a></li>
                 </ul>
               </div>
             </li>
@@ -38,68 +38,59 @@
       </li>
 
       <li><a routerLink="/home" style="cursor: pointer" *ngIf="!isHome || !isContact || !isInscrit || !isInscritArtist">Home</a></li>
-      <li>
-        <a *ngIf="isContact && isHome && !isLoggedIn() && isInscrit && isInscritArtist" href="#">Lien Utiles <i style="margin-left: 5px" class="fa-solid fa-caret-down fa-bounce"></i></a>
-        <!-- Start Megamenu -->
-        <div class="mega-menu">
-          <div class="image">
-            <img src="/assets/imgs/megamenu.png" alt="" />
-          </div>
-          <ul class="links">
-            <li>
-              <a href="#testimonials"><i class="far fa-comments fa-fw"></i>Nos artistes</a>
-            </li>
-            <li>
-              <a href="#services"><i class="far fa-building fa-fw"></i>Services</a>
-            </li>
-            <li>
-              <a href="#work-steps"><i class="far fa-clipboard fa-fw"></i>Comment ça fonctionne</a>
-            </li>
-            <li>
-              <a href="#gallery"><i class="fa-solid fa-film fa-fw"></i>Galerie</a>
-            </li>
-          </ul>
-          <ul class="links">
-            <li>
-              <a href="#pricing"><i class="fas fa-server fa-fw"></i>plans tarifaires</a>
-            </li>
-            <li>
-              <a href="#stats"><i class="far fa-chart-bar fa-fw"></i>Statistiques</a>
-            </li>
-            <li>
-              <a href="#discount"><i class="fas fa-percent fa-fw"></i>Demander une remise</a>
-            </li>
-          </ul>
-        </div>
-        <!-- End Megamenu -->
-      </li>
+
       <li *ngIf="!isLoggedIn()">
         <a routerLink="/signup" routerLinkActive="active-link" style="cursor: pointer">
           <span style="margin-right: 8px" class="fa-solid fa-user-plus" >
 
-          </span>Devenir client
+          </span>Become a customer
         </a>
       </li>
       <li *ngIf="!isLoggedIn()">
         <a routerLink="/signupartist" routerLinkActive="active-link" style="cursor: pointer">
           <span style="margin-right: 8px" class="fa-solid fa-user-plus" >
 
-          </span>Devenir artiste</a>
+          </span>Become an artist</a>
       </li>
 
       <li  *ngIf="!isLoggedIn()">
         <a routerLink="/login" routerLinkActive="active-link" style="cursor: pointer">
           <span style="margin-right: 8px" class="fa-solid fa-right-to-bracket">
 
-          </span>Se connecter
+          </span>Login
         </a>
       </li>
+
+      <li *ngIf="isLoggedIn()">
+        <nav class="navbar navbar-light search">
+          <div class="form-inline">
+            <input [(ngModel)]="searchText" class="form-control dropdown-toggle" type="search"
+                   placeholder="Search" aria-label="Search" data-toggle="dropdown" (focus)="handleFocus()" (blur)="handleBlur()">
+            <div class="dropdown-menu" id="myDropdown">
+            <div class="dropdown" [class.open]="isCursorInside" id="your-element-id">
+                <div *ngFor="let item of items | sortByName: searchText | slice:0:6" class="dropdown-item"
+                     style="width: 15rem;display:flex;border-radius: 8px" (click)="visitProfile(item.profileId)">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" [src]="item.profileImg" alt="">
+                  </div>
+                  <div class="font-weight-bold mr-3" style="cursor: pointer">
+                    <div class="text-truncate" style="margin-top: 8%;">{{item.name}} {{item.lastName}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <i class="fa fa-search" aria-hidden="true" style="margin-left: 6px;font-size: 20px;"></i>
+          </div>
+        </nav>
+      </li>
+
+
 
       <li  *ngIf="isLoggedIn()">
         <a routerLinkActive="active-link" routerLink="/accueil" style="cursor: pointer">
           <span style="margin-right: 8px" class="fa-solid fa-house">
 
-          </span> Accueil
+          </span>Homepage
         </a>
       </li>
 
@@ -113,7 +104,9 @@
 
       <li  *ngIf="isLoggedIn()">
         <a routerLinkActive="active-link" routerLink="/messages" style="cursor: pointer">
-          <i class="fa-solid fa-comment-dots" style="font-size: 21px;"></i>
+          <i class="fa-solid fa-comment-dots" style="font-size: 21px" (click)="setLastMssgDate()">
+            <span *ngIf="!isActiveRoute('/message') && nbrUnreadedChat !== 0" class="notification-count">{{ nbrUnreadedChat }}</span>
+          </i>
         </a>
       </li>
 
@@ -121,19 +114,21 @@
       <li *ngIf="isLoggedIn()" class="dropdown" [class.open]="isDropdownOpen">
         <a routerLinkActive="active-link" style="cursor: pointer" (click)="toggleDropdown($event)">
           <i class="fa-regular fa-bell" style="font-size: 21px" (click)="setLastNotifDate()">
-            <span *ngIf="unreadNotif.length!=0" class="notification-count">{{unreadNotif.length}}</span>
+            <span *ngIf="unreadNotif.length!=0"  class="notification-count">{{unreadNotif.length}}</span>
           </i>
         </a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" style="width: 20rem">
 
-          <div class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header"  *ngFor="let notifi of unreadNotif">
+          <div class="p-3 d-flex align-items-center osahan-post-header hover-effect"
+               *ngFor="let notifi of allNotif;let i = index">
             <div class="dropdown-list-image mr-3">
               <img class="rounded-circle" [src]="notifi.img" alt="">
             </div>
             <div class="font-weight-bold mr-3" style="cursor: pointer" (click)="getdetails(notifi)">
-              <div class="text-truncate">{{notifi.date}}</div>
+              <div class="text-truncate">{{getDifferenceInMinutes(notifi.date)}}</div>
               <div class="small">{{notifi.description}}</div>
             </div>
+            <i style="color: #0fa8f5;font-size: 12px" *ngIf="i<unreadNotif.length" class="fa fa-circle" aria-hidden="true"></i>
           </div>
           <!-- Add more list items for additional notifications -->
         </ul>
@@ -142,14 +137,13 @@
 
 
 
-
       <li  *ngIf="isLoggedIn()" (click)="logout()">
         <a routerLinkActive="active-link" style="cursor: pointer">
           <span style="margin-right: 8px" class="fa-solid fa-right-from-bracket">
-          </span> Se déconnecter
+          </span>Logout
         </a>
       </li>
-      <li><div><a id="contact" routerLink="/contact" style="cursor: pointer">Contactez-nous</a></div></li>
+      <li><div><a id="contact" routerLink="/contact" style="cursor: pointer">contact us</a></div></li>
     </ul>
 
 

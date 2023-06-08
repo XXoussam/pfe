@@ -11,7 +11,7 @@ export class BeforeAfterComponent implements OnInit {
 
   ngOnInit(): void {
     const gazelDescription: HTMLElement | null = document.getElementById("gazelDescription");
-    const text: string = "Cette œuvre d'art consiste en une représentation de gazelle, sculptée à partir de morceaux de bois recyclés, qui ont été soigneusement façonnés et assemblés pour créer une pièce unique.";
+    const text: string = "This work of art consists of a representation of a gazelle, sculpted from recycled pieces of wood, which have been carefully shaped and assembled to create a unique piece.";
     let i: number = 0;
 
     function typeWriter(): void {
@@ -38,7 +38,7 @@ export class BeforeAfterComponent implements OnInit {
     }
     /************************************************************************************************/
     const tortueDescription: HTMLElement | null = document.getElementById("tortueDescription");
-    const text1: string = "Cette tortue unique est le résultat de la créativité de l'artiste et de sa volonté de donner une seconde vie à des matériaux qui auraient autrement été jetés. En utilisant des bouchons de bouteille en plastique, l'artiste a créé une texture et un effet visuel intéressants pour la tortue.";
+    const text1: string = "This unique turtle is the result of the artist's creativity and desire to give a second life to materials that would otherwise have been thrown away. Using plastic bottle caps, the artist created an interesting texture and visual effect for the turtle.";
     let j: number = 0;
 
     function typeWriter1(): void {

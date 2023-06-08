@@ -1,61 +1,19 @@
-<div class="container profile">
-  <div class="profile-img-list" *ngIf="images.length >= 3">
-    <div style="width: 20.6rem" class="profile-img-list-item main">
-      <a  class="profile-img-list-link">
-        <span class="profile-img-content">
-          <img *ngIf="images!=[]" [src]="images[0].path">
-        </span>
+<div class="container profile" *ngIf="images.length>0">
+  <div class="gallery">
+    <div class="gallery-item" *ngIf="currentImage">
+      <a class="gallery-link" (click)="openImageModal()">
+        <img [src]="currentImage.path" alt="Image" class="gallery-img">
       </a>
     </div>
-    <div  style="display: grid;">
-      <div class="profile-img-list-item">
-        <a class="profile-img-list-link">
-          <span class="profile-img-content">
-            <img *ngIf="images!=[]" [src]="images[1].path">
-          </span>
-        </a>
-      </div>
-
-      <div class="profile-img-list-item with-number">
-        <a class="profile-img-list-link">
-          <span class="profile-img-content">
-            <img *ngIf="images!=[]" [src]="images[2].path">
-          </span>
-          <div class="profile-img-number">+12</div>
-        </a>
-      </div>
-    </div>
+    <div class="gallery-arrow left" (click)="previousImage()" *ngIf="currentIndex > 0">&#8249;</div>
+    <div class="gallery-arrow right" (click)="nextImage()" *ngIf="currentIndex < images.length - 1">&#8250;</div>
   </div>
-  <div class="profile-img-list" *ngIf="images.length == 2">
-    <div class="profile-img-list-item main">
-      <a  class="profile-img-list-link">
-        <span class="profile-img-content">
-          <img *ngIf="images!=[]" [src]="images[0].path">
-        </span>
-      </a>
-    </div>
-    <div  style="display: grid;">
-      <div style="width: 100%" class="profile-img-list-item">
-        <a class="profile-img-list-link">
-          <span class="profile-img-content">
-            <img *ngIf="images!=[]" [src]="images[1].path">
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="profile-img-list" *ngIf="images.length == 1">
-    <div style="width: 80%;margin-left: 5.6rem" class="profile-img-list-item main">
-      <a  class="profile-img-list-link">
-        <span class="profile-img-content">
-          <img *ngIf="images!=[]" [src]="images[0].path">
-        </span>
-      </a>
-    </div>
-  </div>
-
 </div>
 
-
-
+<!-- Image Modal -->
+<div class="image-modal" [ngClass]="{'active': isImageModalOpen}">
+  <div class="modal-content">
+    <span class="close" (click)="closeImageModal()">&times;</span>
+    <img *ngIf="currentImage" [src]="currentImage.path" alt="Image" class="modal-img">
+  </div>
+</div>

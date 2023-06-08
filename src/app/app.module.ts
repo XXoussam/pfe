@@ -37,7 +37,11 @@ import { AccueilPostComponent } from './accueil/accueil-post/accueil-post.compon
 import {FollowersComponent} from "./simple-user/followers/followers.component";
 import {FollowingArtistComponent} from "./artist-home/following-artist/following-artist.component";
 import { FollowerArtistComponent } from './artist-home/follower-artist/follower-artist.component';
-import { MessagesComponent } from './messages/messages.component';
+import {CustomDatePipe, MessagesComponent} from './messages/messages.component';
+import {EmojiModule} from "@ctrl/ngx-emoji-mart/ngx-emoji";
+import { PayementComponent } from './payement/payement.component';
+import { GaleryComponent } from './artist-home/galery/galery.component';
+import {SortByNamePipe} from "./head/sortByNamePipe";
 
 
 @NgModule({
@@ -71,7 +75,11 @@ import { MessagesComponent } from './messages/messages.component';
     FollowingArtistComponent,
     FollowersComponent,
     FollowerArtistComponent,
-    MessagesComponent
+    MessagesComponent,
+    CustomDatePipe,
+    PayementComponent,
+    GaleryComponent,
+    SortByNamePipe
   ],
     imports: [
         BrowserModule,
@@ -82,8 +90,8 @@ import { MessagesComponent } from './messages/messages.component';
         MatIconModule,
         RouterModule,
         ReactiveFormsModule,
-        PickerModule
-
+        PickerModule,
+        EmojiModule
     ],
   providers: [],
   bootstrap: [AppComponent]

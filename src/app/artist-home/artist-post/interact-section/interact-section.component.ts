@@ -50,7 +50,6 @@ export class InteractSectionComponent implements OnInit {
   showAll = false;
   redHeart = false;
   showLikeList!:boolean;
-  ////////////////////////////////
   likes:string[] = []
   items:any[] = []
 

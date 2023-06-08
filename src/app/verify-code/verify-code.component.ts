@@ -48,7 +48,7 @@ export class VerifyCodeComponent implements OnInit {
         (result) => {
           console.log(result)
           localStorage.removeItem('countDownDate');
-          this.router.navigate(['/homeartist']);
+          this.router.navigate(['/homeartist',verf.artiste.profileId]);
         }, error => {
           alert(error.message)
           console.log(error.message)

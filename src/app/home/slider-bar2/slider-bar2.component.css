@@ -118,21 +118,15 @@
     border-radius: 6px;
 }
 .button-benefits{
-    width: 200px;
-    height: 50px;
-    background: #fff;
     font-size: 1.3em;
-    border-radius: 6px;
-    margin-left: 5%;
+    margin-left: 10%;
+  border: 2px solid white;
 }
 .button-benefits-user{
-    width: 200px;
-    height: 50px;
-    background: #fff;
     font-size: 1.3em;
-    border-radius: 6px;
     margin-left: 65%;
     margin-top:10px;
+  border: 2px solid white;
 }
 .slider-btn.prev{
     left: 1rem;
@@ -241,24 +235,11 @@
   }
 
   .apropos{
-    width: 70%;
-    height: 12%;
-    background: #f2eff1;
     margin-left: 20%;
     margin-top: 15px;
     font-size: 1.3em;
-    border-radius: 6px;
   }
 
-  .button-benefits{
-    width: 50%;
-    height: 12%;
-    background: #f2eff1;
-    margin-left: 25%;
-    margin-top: 15px;
-    font-size: 1.3em;
-    border-radius: 6px;
-  }
 
   #st{
     display: block;
@@ -280,16 +261,6 @@
     margin-top:0;
     font-size: 27px;
     margin-left: 63px;
-  }
-
-  .button-benefits-user{
-    width: 200px;
-    height: 50px;
-    background: #fff;
-    font-size: 1.3em;
-    border-radius: 6px;
-    margin-left: 0;
-    margin-top: -14px;
   }
 
   #content1{

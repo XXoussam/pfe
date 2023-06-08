@@ -6,6 +6,7 @@ import {UserService} from "../service/user.service";
 import {Artist} from "../models/artist";
 import {ArtistService} from "../service/artist.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {SimpleUserService} from "../service/simple-user.service";
 
 @Component({
   selector: 'app-accueil',
@@ -37,17 +38,25 @@ export class AccueilComponent implements OnInit {
   followingPosts:Publication[] = []
   currentSimpleUser: any;
   allArtist: any[] = [];
+  allSimpleUsers: any[] = [];
+  allUsers: any[] = [];
 
   constructor(private sanitizer: DomSanitizer,
-              private publicationService:PublicationService,private userService:UserService,private  artistService:ArtistService
+              private publicationService:PublicationService,
+              private userService:UserService,
+              private simpleUserService : SimpleUserService,
+              private  artistService:ArtistService
               ) { }
 
   ngOnInit(): void {
 
     this.getFollowingPosts();
+
+    this.getAllArtist();
+    this.getAllSimpleUser();
+
     // @ts-ignore
     this.getCurrentUser(localStorage.getItem("ProfileId"))
-    this.getAllArtist();
 
   }
 
@@ -68,9 +77,8 @@ export class AccueilComponent implements OnInit {
   getCurrentUser(profileId:string){
     this.userService.fetchCurrentUser(profileId).subscribe(
       (response:any)=>{
-        console.log("//////////////////"+JSON.stringify(response.following[0]))
+        console.log("//////////////////"+JSON.stringify(response))
         this.currentSimpleUser=response;
-
       },error=>{
         console.log(error)
       }
@@ -81,7 +89,22 @@ export class AccueilComponent implements OnInit {
     this.artistService.getAllArtist().subscribe(
       (response:Artist[])=>{
         console.log(response)
+
         this.allArtist.push(...response)
+        this.allUsers.push(...response)
+
+      },error=>{
+        console.log(error)
+      }
+    )
+  }
+
+  getAllSimpleUser(){
+    this.simpleUserService.getAllSimpleUserDTOS().subscribe(
+      (response)=>{
+        console.log(response)
+        this.allSimpleUsers.push(...response)
+        this.allUsers.push(...response)
       },error=>{
         console.log(error)
       }
@@ -93,7 +116,12 @@ export class AccueilComponent implements OnInit {
     this.userService.follow(profileId).subscribe(
       (response)=>{
         console.log(response)
-        this.allArtist.splice(i,1)
+        if (this.currentSimpleUser.roles[0].roleName=='User'){
+          this.allArtist.splice(i,1)
+        }else {
+          this.allUsers.splice(i,1)
+        }
+
       },error => {
         console.log(error)
       }

@@ -1,11 +1,10 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserAuthService} from "../service/user-auth.service";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {UserService} from "../service/user.service";
-import {GlobalService} from "../service/global.service";
 import {interval, Subject, switchMap, takeUntil} from "rxjs";
 import {PublicationService} from "../service/publication.service";
-import {Publication} from "../models/publication";
+import {ChatService} from "../service/chat.service";
 
 @Component({
   selector: 'app-head',
@@ -22,10 +21,15 @@ export class HeadComponent implements OnInit {
   profileId = "";
   isDropdownOpen: boolean = false;
   unreadNotif:any[]=[];
+  allNotif:any[]=[];
+  nbrUnreadedChat=0;
 
 
   constructor(private userAuthService:UserAuthService,private userService:UserService,
-              private router:Router,private pubService:PublicationService) { }
+              private router:Router,private pubService:PublicationService,private chatService:ChatService) {
+
+
+  }
 
   ngOnInit(): void {
 
@@ -53,6 +57,9 @@ export class HeadComponent implements OnInit {
     this.profileId = localStorage.getItem("ProfileId");
 
     this.getUnreadNotification();
+    this.getAllNotif();
+    this.getUnreadedNbrChat();
+    this.getAllForSearch();
   }
 
   moveUp() {
@@ -100,7 +107,7 @@ export class HeadComponent implements OnInit {
       });
     } else {
       document.removeEventListener('click', this.closeDropdown);
-      //this.getUnreadNotification();
+      this.getUnreadNotification();
       this.resumeNotificationPolling();
     }
   }
@@ -116,20 +123,26 @@ export class HeadComponent implements OnInit {
 private pauseSubject = new Subject<void>();
 
   getUnreadNotification() {
-   /* interval(700)
+    interval(700)
       .pipe(
         switchMap(() => this.userService.getUnreadNotif()),
         takeUntil(this.pauseSubject) // Stop polling when pauseSubject emits a value
       )
       .subscribe(
         (response) => {
-          //console.log(response);
           this.unreadNotif = response;
+          const notificationIds = this.allNotif.map(notification => notification.id);
+
+          this.unreadNotif.forEach(item=>{
+            if (!notificationIds.includes(item.id)){
+              this.allNotif.unshift(item)
+            }
+          })
         },
         (error) => {
           console.log(error);
         }
-      );*/
+      );
   }
 
 // Method to pause the polling
@@ -182,11 +195,110 @@ private pauseSubject = new Subject<void>();
        // Code to execute after waiting for a second
        // Add your desired code here
      }, 150); // 1000 milliseconds = 1 second
-     //const button = document.getElementById("myButton") as HTMLButtonElement;
-
-
 
    }
   }
 
+  getAllNotif(){
+    this.userService.getAllNotifi().subscribe(
+      (response)=>{
+        // Sort the response array by date in ascending order
+        const sortedResponse = response.sort((b, a) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        console.log(sortedResponse);
+        this.allNotif=sortedResponse;
+
+      },error => {
+        console.log(error)
+      }
+    )
+  }
+
+
+  setLastMssgDate() {
+    this.chatService.setlastChatsDate().subscribe(
+      (response)=>{
+        console.log(response)
+      },error => {
+        console.log(error)
+      }
+    )
+  }
+
+  getUnreadedNbrChat() {
+    setInterval(() => {
+      this.chatService.getUnreadedNbrChat().subscribe(
+        (response) => {
+          console.log(response);
+          this.nbrUnreadedChat = response;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }, 700); // 1000 milliseconds = 1 second
+  }
+
+
+  isActiveRoute(route: string): boolean {
+    return this.router.url.includes(route);
+  }
+
+  getDifferenceInMinutes(dateString: string): string {
+    const dateObject = new Date(dateString);
+    const currentDate = new Date();
+
+    const differenceInMilliseconds = currentDate.getTime() - dateObject.getTime();
+    const differenceInMinutes = Math.floor(differenceInMilliseconds / (1000 * 60));
+
+    if (differenceInMinutes < 60) {
+      return differenceInMinutes + ' mins ago'
+    }else {
+      const differenceInHours = Math.floor(differenceInMinutes / 60);
+      const remainingMinutes = differenceInMinutes % 60;
+        return differenceInHours+' hour ago and '+remainingMinutes+' mins ago';
+    }
+  }
+
+  isCursorInside: boolean = false;
+
+  handleFocus() {
+    this.isCursorInside = true;
+  }
+
+  handleBlur() {
+    this.isCursorInside = false;
+  }
+
+
+  /******************* search by name *********************************/
+  searchText= '';
+
+  items: any[] = [];
+
+  getAllForSearch(){
+    this.userService.getAllForSearch().subscribe(
+      (response)=>{
+        console.log(response)
+        this.items=response
+      },error => {
+        console.log(error)
+      }
+    )
+  }
+
+
+  visitProfile(profileId:any) {
+    console.log(profileId)
+    console.log(this.currentUrl)
+    if (this.currentUrl.includes("/visitProfile")){
+      this.router.navigate(["/visitProfile",profileId]);
+      setTimeout(() => {
+        location.reload();
+      }, 500);
+    }
+    else {
+      this.router.navigate(["/visitProfile",profileId]);
+    }
+    this.isCursorInside=false
+  }
 }

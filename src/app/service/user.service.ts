@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {Artist} from "../models/artist";
 import {Comment} from "../models/Comment";
 import {GlobalService} from "./global.service";
+import {UpdatedUser} from "../models/updatedUser";
 
 @Injectable({
   providedIn: 'root'
@@ -91,5 +92,36 @@ export class UserService {
     const headers = { Authorization: `Bearer ${(this.jwt)}`}; // replace `jwt` with your actual JWT value
     return this.http.get<boolean>(`${this.apiServerUrl}/checkFollowers/`+profileId,{ headers });
   }
+
+  updateUser(updated:UpdatedUser): Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}`}; // replace `jwt` with your actual JWT value
+    return this.http.post<any>(`${this.apiServerUrl}/updateUser`,updated,{ headers });
+  }
+
+  modifyAbout(about:string): Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}`}; // replace `jwt` with your actual JWT value
+    return this.http.post<any>(`${this.apiServerUrl}/artiste/modifyDescription`,about,{ headers });
+  }
+
+  modifyLives(lives:string): Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}`}; // replace `jwt` with your actual JWT value
+    return this.http.post<any>(`${this.apiServerUrl}/artiste/modifyLives`,lives,{ headers });
+  }
+
+  modifyWebsite(webUrl:string): Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}`}; // replace `jwt` with your actual JWT value
+    return this.http.post<any>(`${this.apiServerUrl}/artiste/modifyWebsite`,webUrl,{ headers });
+  }
+
+  modifyPhone(phone:string): Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}`}; // replace `jwt` with your actual JWT value
+    return this.http.post<any>(`${this.apiServerUrl}/artiste/modifyPhone`,phone,{ headers });
+  }
+
+  getAllForSearch(): Observable<any>{
+    const headers = { Authorization: `Bearer ${(this.jwt)}`}; // replace `jwt` with your actual JWT value
+    return this.http.get<any>(`${this.apiServerUrl}/search`,{ headers });
+  }
+
 
 }

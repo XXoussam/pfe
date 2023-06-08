@@ -7,17 +7,21 @@
             <input (click)="slideTo(3)" type="radio" name="radio-btn" id="radio3" #radio3>
             <div class="st first" style="background:#f2eff1 ">
                 <div class="content" id="content1" style="background:#f2eff1 ;border: solid #f2eff1 3px; border-radius: 5px;width: 60%;" >
-                    <h2 class="bienvenue">Bienvenue chez UpcyclingArt</h2>
-                    <p id="ph">Ici, on donne aux choses une autre vie à vivre. Rejoignez-nous dans notre mission de promouvoir la durabilité et la créativité grâce à l'art de l'upcycling.</p>
+                    <h2 class="bienvenue">Welcome to UpcyclingArt</h2>
+                    <p id="ph">Here, things are given another life to live. Join us in our mission to promote sustainability and creativity through the art of upcycling.</p>
                     <br>
-                  <button class="apropos"> Connexion </button>
+                  <button
+                    style=" margin-left: 30%;
+                    margin-top: 15px;
+                     font-size: 1.3em;"
+                    routerLink="/signup" class="btn btn-dark"> Connexion </button>
                 </div>
                 <img id="tree" src="/assets/imgs/bonsai-removebg-preview.png" ></div>
 
             <div class="st">
                 <div class="content">
-                    <h1 >Des trésors cachés dans vos déchets</h1>
-                    <button class="button-benefits">  Nous-rejoindre </button>
+                    <h1 >Treasures hidden in your trash</h1>
+                    <button routerLink="/signupartist" class="btn btn-light button-benefits">Join us</button>
                 </div>
             </div>
 
@@ -26,8 +30,8 @@
                     <img id="recycle" src="/assets/imgs/2502606-removebg-preview.png">
                 </div>
                 <div class=" content">
-                    <h1 id="title3">Transformez vos déchets en trésors</h1>
-                    <button class="button-benefits-user"> Devenir un artiste </button>
+                    <h1 id="title3">Turn your trash into treasure</h1>
+                    <button routerLink="/signupartist" class="btn btn-light button-benefits-user">Become an artist</button>
 
                 </div>
 

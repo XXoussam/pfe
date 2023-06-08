@@ -20,10 +20,32 @@ export class ChatService {
     return this.http.get<any[]>(`${this.apiServerUrl}/chats/getCurrentUserChat`,{headers});
   }
 
-  getLastMssg(profileId:string):Observable<any> {
+  getChat(profileId:string):Observable<any> {
     const headers = { Authorization: `Bearer ${(this.jwt)}` };
-    return this.http.get<any>(`${this.apiServerUrl}/chats/lastmessage/`+profileId,{headers});
+    return this.http.get<any>(`${this.apiServerUrl}/chats/getChat/`+profileId,{headers});
   }
+
+  sendMssg(chatId:number,mssgBody:string):Observable<any> {
+    const headers = { Authorization: `Bearer ${(this.jwt)}` };
+    return this.http.post<any>(`${this.apiServerUrl}/chats/send/`+chatId,mssgBody,{headers});
+  }
+
+  openChat(profileId:string):Observable<any> {
+    const headers = { Authorization: `Bearer ${(this.jwt)}` };
+    return this.http.post<any>(`${this.apiServerUrl}/chats/add/`+profileId,null,{headers});
+  }
+
+  setlastChatsDate():Observable<any> {
+    const headers = { Authorization: `Bearer ${(this.jwt)}` };
+    return this.http.post<any>(`${this.apiServerUrl}/chats/setlastDate`,null,{headers});
+  }
+
+  getUnreadedNbrChat():Observable<number> {
+    const headers = { Authorization: `Bearer ${(this.jwt)}` };
+    return this.http.get<number>(`${this.apiServerUrl}/chats/nbrMssgs`,{headers});
+  }
+
+
 
 
 }

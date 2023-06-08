@@ -4,7 +4,6 @@
   flex-wrap: wrap;
 }
 .discount .image {
-  background-image: url(/src/assets/imgs/discount-background1.jpg);
   background-size: cover;
   color: white;
   flex-basis: 50%;
@@ -21,10 +20,9 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 97%;
   background-color: rgb(225, 211, 188);
   z-index: -1;
-  border-top-right-radius: 280px;
 }
 @media (max-width: 991px) {
   .discount .image {
@@ -52,6 +50,7 @@
   border-bottom: 1px solid #ccc;
   background-color: #f9f9f9;
   caret-color: var(--main-color);
+  border-radius: 6px;
 }
 .discount .form textarea.input {
   resize: none;
@@ -113,4 +112,11 @@
 .option{
   font-size: 18px;
   background-color: rgba(65, 124, 175, 0.37);
+}
+
+#shape13{
+  transform: rotate(-95deg);
+  height: 11rem;
+  width: 44rem;
+  margin: -40rem -36rem 0 0;
 }

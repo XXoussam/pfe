@@ -9,17 +9,25 @@
           <div class="cover">
             <div class="gray-shade"></div>
             <figure>
-              <img src="https://bootdey.com/img/Content/bg1.jpg" class="img-fluid" alt="profile cover">
+              <img style="height: 25rem" [src]="profile.backProfileImg" class="img-fluid" alt="profile cover">
             </figure>
             <div class="cover-body d-flex justify-content-between align-items-center">
-              <div>
+              <div style="display: flex">
                 <img class="profile-pic" [src]="profile.profileImg" alt="profile">
-                <span class="profile-name">{{profile.name}} {{profile.lastName}}
-                  <i *ngIf="profile.roles[0].roleName == 'Artiste'" class="fa-solid fa-check-circle" style="color: #3ba6f7;"></i>
-                </span>
+                <div class="rating">
+                  <span class="profile-name">{{profile.name}} {{profile.lastName}}
+                    <i *ngIf="profile.roles[0].roleName == 'Artiste'" class="fa-solid fa-check-circle" style="color: #3ba6f7;"></i>
+                  </span>
+                  <div *ngIf="profile.roles[0].roleName == 'Artiste'" class="stars">
+                    <i *ngFor="let _ of [1, 2, 3, 4, 5]; let i=index;" class="fa fa-star"
+                       [ngStyle]="{ 'color': i < currentStar ? 'gold' : '#80808085' }"
+                       (mouseenter)="highlightStars(i + 1)" (mouseleave)="resetStars()"
+                       style="cursor: pointer" (click)="rateArtist(i)"></i>
+                  </div>
+                </div>
               </div>
               <div class="d-none d-md-block">
-                <button *ngIf="!isFollowed" class="btn btn-primary btn-icon-text btn-edit-profile" (click)="follow(profileId)">
+                <button style="margin-right: 10px;" *ngIf="!isFollowed" class="btn btn-primary btn-icon-text btn-edit-profile" (click)="follow(profileId)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus" data-toggle="tooltip" title="" data-original-title="Connect">
                     <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                     <circle cx="8.5" cy="7" r="4"></circle>
@@ -28,25 +36,31 @@
                   </svg>
                 Follow
                 </button>
-                <button *ngIf="isFollowed" (click)="unfollowArtist(profileId)" class="btn btn-light pull-right">Unfollow</button>
+                <button style="margin-right: 10px;" *ngIf="isFollowed" (click)="unfollowArtist(profileId)" class="btn btn-light pull-right">Unfollow</button>
+
+                <button *ngIf="!checkIfChatExist()" (click)="OpenChat(profileId)" class="btn btn-light pull-right">
+                  Open a chat
+                  <img style="width: 20px" src="assets/imgs/messenger.png">
+                </button>
+
               </div>
             </div>
           </div>
           <div class="header-links">
             <ul class="links d-flex align-items-center mt-3 mt-md-0">
-              <li class="header-link-item d-flex align-items-center active">
+              <li style="cursor: pointer" id="timeLine" class="header-link-item d-flex align-items-center active">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-columns mr-1 icon-md">
                   <path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18"></path>
                 </svg>
-                <a class="pt-1px d-none d-md-block" href="#">Timeline</a>
+                <a (click)="displayTimeLine()" class="pt-1px d-none d-md-block">Timeline</a>
               </li>
-              <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+              <li style="cursor: pointer" id="gallery" class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image mr-1 icon-md">
                   <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                   <circle cx="8.5" cy="8.5" r="1.5"></circle>
                   <polyline points="21 15 16 10 5 21"></polyline>
                 </svg>
-                <a class="pt-1px d-none d-md-block" href="#">Photos</a>
+                <a (click)="showGallery()" class="pt-1px d-none d-md-block">Gallery</a>
               </li>
             </ul>
           </div>
@@ -55,7 +69,7 @@
     </div>
     <div class="row profile-body">
       <!-- left wrapper start -->
-      <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
+      <div *ngIf="!displayGallery" class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
         <div class="card rounded">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -88,22 +102,27 @@
                 </div>
               </div>
             </div>
-            <p>Hi! I'm Amiah the Senior UI Designer at Vibrant. We hope you enjoy the design and quality of Social.</p>
+            <p>{{profile.description}}</p>
             <div class="mt-3">
               <label class="tx-11 font-weight-bold mb-0 text-uppercase">Joined:</label>
-              <p class="text-muted">November 15, 2015</p>
+              <p class="text-muted">{{profile.joined}}</p>
             </div>
             <div class="mt-3">
               <label class="tx-11 font-weight-bold mb-0 text-uppercase">Lives:</label>
-              <p class="text-muted">New York, USA</p>
+              <p class="text-muted">{{profile.lives}}</p>
             </div>
             <div class="mt-3">
               <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
-              <p class="text-muted">me@nobleui.com</p>
+              <p class="text-muted">{{profile.email}}</p>
+            </div>
+            <div *ngIf="profile.specialite" class="mt-3">
+              <label class="tx-11 font-weight-bold mb-0 text-uppercase">Phone:</label>
+              <p class="text-muted">{{profile.telephone}}</p>
             </div>
             <div class="mt-3">
               <label class="tx-11 font-weight-bold mb-0 text-uppercase">Website:</label>
-              <p class="text-muted">www.nobleui.com</p>
+              <br>
+              <a [href]="profile.website" target="_blank">{{profile.website}}</a>
             </div>
             <div class="mt-3 d-flex social-links">
               <a href="javascript:;" class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon github">
@@ -129,7 +148,7 @@
       </div>
       <!-- left wrapper end -->
       <!-- middle wrapper start -->
-      <div class="col-md-8 col-xl-6 middle-wrapper">
+      <div *ngIf="!displayGallery" class="col-md-8 col-xl-6 middle-wrapper">
         <div class="row">
 
 
@@ -217,6 +236,10 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div *ngIf="!display&& displayGallery">
+        <app-galery [postsByOwner]="postsByOwner"></app-galery>
       </div>
       <!-- middle wrapper end -->
     </div>

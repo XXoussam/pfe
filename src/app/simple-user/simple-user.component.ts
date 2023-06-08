@@ -9,6 +9,8 @@ import {ArtistService} from "../service/artist.service";
 import {Artist} from "../models/artist";
 import {UserService} from "../service/user.service";
 import {SimpleUserService} from "../service/simple-user.service";
+import {NgForm} from "@angular/forms";
+import {UpdatedUser} from "../models/updatedUser";
 
 @Component({
   selector: 'app-simple-user',
@@ -27,6 +29,9 @@ export class SimpleUserComponent implements OnInit {
   displayFollower = false;
   nbrFollowers!: number;
   nbrFollowing!: number;
+  displayGallery: boolean =false;
+  about: string=' ';
+  website: string=' ';
 
 
   constructor(private sanitizer: DomSanitizer,
@@ -141,7 +146,9 @@ export class SimpleUserComponent implements OnInit {
       (response:any)=>{
         console.log("*******************"+JSON.stringify(response.follower), "Length:", response.follower.length)
         this.currentSimpleUser=response;
-        this.allArtist.push(...response);
+        this.about=response.description;
+        this.website=response.website;
+        console.log(this.about)
       },error=>{
         console.log(error)
       }
@@ -152,6 +159,7 @@ export class SimpleUserComponent implements OnInit {
   displayFollowing() {
     this.display = false;
     this.displayFollower=false;
+    this.displayGallery=false;
     const elements = document.querySelectorAll('.header-link-item');
     elements.forEach(element => {
       element.classList.remove('active');
@@ -164,6 +172,7 @@ export class SimpleUserComponent implements OnInit {
   displayTimeLine() {
     this.display=true;
     this.displayFollower=false
+    this.displayGallery=false;
     const elements = document.querySelectorAll('.header-link-item');
     elements.forEach(element => {
       element.classList.remove('active');
@@ -178,11 +187,26 @@ export class SimpleUserComponent implements OnInit {
   displayFollowers() {
     this.display=false;
     this.displayFollower=true
+    this.displayGallery=false;
     const elements = document.querySelectorAll('.header-link-item');
     elements.forEach(element => {
       element.classList.remove('active');
     });
     const timeLine = document.getElementById("followers");
+    // @ts-ignore
+    timeLine.classList.add("active")
+  }
+
+  showGallery() {
+    this.display=false;
+    this.displayFollower=false;
+    this.displayGallery=true;
+
+    const elements = document.querySelectorAll('.header-link-item');
+    elements.forEach(element => {
+      element.classList.remove('active');
+    });
+    const timeLine = document.getElementById("gallery");
     // @ts-ignore
     timeLine.classList.add("active")
   }
@@ -216,4 +240,88 @@ export class SimpleUserComponent implements OnInit {
   handleVariableFollowing(variable: number) {
     this.nbrFollowing = variable;
   }
+
+  onSubmit(f: NgForm) {
+    console.log(f)
+    let updated = new UpdatedUser();
+    updated.name=f.value.name
+    updated.lastName=f.value.lastName
+    updated.profileImg=f.value.profileImg
+    updated.backProfileImg=f.value.backProfileImg
+    console.log(updated)
+    this.userService.updateUser(updated).subscribe(
+      (response)=>{
+        console.log(response)
+      },error=>{
+        console.log(error)
+      }
+    )
+  }
+
+  closeModal() {
+    const element = document.getElementById('closeModal')
+    // @ts-ignore
+    element.click();
+  }
+
+  /****************************************************************/
+  hide(id: string) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.display = "none";
+      // @ts-ignore
+      this.getCurrentUser(localStorage.getItem("ProfileId"))
+    }
+  }
+
+  show(id: string) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.display = "block";
+    }
+  }
+
+  getElementDisplay(elementId: string): string {
+    const element = document.getElementById(elementId);
+    return element ? element.style.display : '';
+  }
+
+  saveAbout() {
+    this.hide('about')
+    this.simpleUserService.modifyAbout(this.about).subscribe(
+      (response)=>{
+        console.log(response)
+        // @ts-ignore
+        this.getCurrentUser(localStorage.getItem("ProfileId"))
+      },error => {
+        console.log(error)
+      }
+    )
+  }
+
+  saveWebsite() {
+    this.hide('website')
+    this.simpleUserService.modifyWebsite(this.website).subscribe(
+      (response)=>{
+        console.log(response)
+        // @ts-ignore
+        this.getCurrentUser(localStorage.getItem("ProfileId"))
+      },error => {
+        console.log(error)
+      }
+    )
+  }
+
+
+  clear(elementId: string): void {
+    if (elementId==='about'){
+      this.about=' ';
+    }else if (elementId==='website'){
+      this.website=' ';
+    }
+  }
+
+
+
+
 }

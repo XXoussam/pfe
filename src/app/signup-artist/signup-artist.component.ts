@@ -6,15 +6,26 @@ import {ArtistService} from "../service/artist.service";
 import {Router} from "@angular/router";
 import {SimpleUserService} from "../service/simple-user.service";
 import {GlobalService} from "../service/global.service";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-signup-artist-home',
   templateUrl: './signup-artist.component.html',
-  styleUrls: ['./signup-artist.component.css']
+  styleUrls: ['./signup-artist.component.css'],
+  animations: [
+    trigger('alertAnimation', [
+      state('void', style({ transform: 'translateY(-100%)' })),
+      state('*', style({ transform: 'translateY(0)' })),
+      transition('void => *', animate('1s')),
+      transition('* => void', animate('1s'))
+    ])
+  ]
 })
 export class SignupArtistComponent implements OnInit {
   showHide = false;
   showHidecf = false;
+  showAlert:boolean=false;
+  isLoading: boolean = false;
 
   constructor(private spinner:NgxSpinnerService,
               private simpleUserService:SimpleUserService,
@@ -47,6 +58,14 @@ export class SignupArtistComponent implements OnInit {
   ngOnInit(): void {
     // @ts-ignore
     this.signupForm.setValidators(this.checkPasswords);
+    window.scrollTo(0, 0);
+
+    this.showAlert = true;
+
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 100000);
+
   }
   /*verifyMails(email:string){
     this.spinner.show();
@@ -66,8 +85,8 @@ export class SignupArtistComponent implements OnInit {
   }*/
 
 
-  signup(signupForm: FormGroup) {
-    /*this.router.navigate(['/verify'], {state: {submitted: true}});*/
+  async signup(signupForm: FormGroup) {
+    this.isLoading = true;
     let user = new Artist();
     user.name = signupForm.value.name;
     user.userName = signupForm.value.userName;
@@ -78,18 +97,18 @@ export class SignupArtistComponent implements OnInit {
     user.description = signupForm.value.description;
     user.cin = signupForm.value.cin;
     console.log(user)
-      this.artistService.addArtist(user).subscribe(
-        (result:Artist)=>{
-          this.globalService.artiste = user
-          console.log(this.globalService.artiste)
-          this.globalService.myGlobalVariable = 'artiste';
-          this.router.navigate(['/verify']);
-          console.log(result)
-        },error=>{
-          alert('this Email already exist')
-        }
-      )
-
+    this.artistService.addArtist(user).subscribe(
+      (result: Artist) => {
+        this.globalService.artiste = result
+        console.log(this.globalService.artiste)
+        this.globalService.myGlobalVariable = 'artiste';
+        this.router.navigate(['/verify']);
+        console.log(result)
+      }, error => {
+        alert('this Email already exist')
+      }
+    )
+    this.isLoading = false;
   }
 
 
